@@ -168,6 +168,7 @@ export interface AddProductState {
   price: string;
   stock: number;
   image: string | StaticImageData
+  
 
 }
 
