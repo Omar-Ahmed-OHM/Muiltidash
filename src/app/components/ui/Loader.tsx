@@ -61,6 +61,7 @@ export default function LogoImageAnimation() {
         src={logo}
         alt="Hoor Book Logo"
         className="w-64 h-auto"
+         unoptimized
       />
     </div>
   );
