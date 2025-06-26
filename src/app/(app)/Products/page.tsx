@@ -84,7 +84,7 @@ useEffect(() => {
    <div dir="rtl" className="navbar px-4 py-2 flex items-center justify-center gap-[40px] shadow-sm bg-btn-color">
     
     <div className="text-white font-bold text-lg">
-    <Image src={Logo} alt="شعار الموقع" className="h-[42px] w-[55px] rounded-[10px]" />
+    <Image src={Logo} alt="شعار الموقع" className="h-[42px] w-[55px] rounded-[10px]"  unoptimized/>
     </div>
     
     <div className="flex flex-1 mx-4 max-w-xl bg-white rounded-lg outline-none overflow-hidden shadow-inner">

@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         <div className="py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
           {/* Logo & About */}
           <div>
-            <Image src={Logo} alt="Hoor Hyper Logo" width={150} height={75} className="mb-4" />
+            <Image src={Logo} alt="Hoor Hyper Logo" width={150} height={75} className="mb-4" unoptimized />
             <p className="text-sm leading-relaxed text-gray-100">
               هايبر حور – كل احتياجات بيتك من مكان واحد. عروض يومية، جودة مضمونة، وخدمة عملاء ممتازة.
             </p>

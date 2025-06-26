@@ -17,6 +17,8 @@ export default function Topbar() {
           width={36}
           height={36}
           className="rounded-full shadow-md"
+         unoptimized
+        
         />
         <h1 className="text-lg font-bold text-[#6B2B7A]">
           أهلاً بك في لوحة التحكم 👋

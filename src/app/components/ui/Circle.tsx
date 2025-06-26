@@ -21,6 +21,8 @@ export const Circle:React.FC<CategoryProps>=({
           width={70}
           height={70}
           className="object-contain"
+         unoptimized
+
         />
       </div>
       <p className="text-sm font-bold text-center leading-tight text-gray-800">

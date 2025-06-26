@@ -47,6 +47,7 @@ export const Slider:React.FC<SwiperSliderProps>=({
     })}
           sizes="100vw"
           priority={i === 0}
+          unoptimized
         />
       </div>
     </Link>

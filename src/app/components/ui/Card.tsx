@@ -59,7 +59,7 @@ export const Card: React.FC<CardProps> = ({
 
     {/* أوفرلي عند الهوفر */}
     <div className="absolute inset-0 bg-[#6B2B7A]/80 flex flex-col items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-      <Image src={Logo} alt="Logo" width={220} height={220} className="w-[120px] h-[120px] object-contain rounded-full mb-4" />
+      <Image src={Logo} alt="Logo" width={220} height={220} className="w-[120px] h-[120px] object-contain rounded-full mb-4" unoptimized/>
       <div dir="rtl">
         <Link href={`/Categories/${id}`} className="text-white font-bold text-lg mb-2">
           <button className="font-bold text-lg px-6 py-2 rounded-xl bg-[#ffc94d] transition w-full">عرض التفاصيل</button>
@@ -69,7 +69,7 @@ export const Card: React.FC<CardProps> = ({
 
     {/* صورة المنتج */}
     <div className="relative w-full h-56">
-      <Image src={`${BaseUrl}${image}`} alt={name} fill className="object-contain rounded-t-2xl pt-5" />
+      <Image src={`${BaseUrl}${image}`} alt={name} fill className="object-contain rounded-t-2xl pt-5" unoptimized/>
     </div>
 
     {/* التفاصيل */}
