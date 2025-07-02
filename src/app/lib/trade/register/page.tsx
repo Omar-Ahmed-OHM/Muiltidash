@@ -7,7 +7,7 @@ import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SmartNavbar from "@/app/components/ui/Navbar";
-import Logo from "../../../public/asset/images/حورلوجو.jpeg";
+import Logo from "../../../../../public/asset/images/حورلوجو-1.png";
 import { Postresponse } from "../../methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 
