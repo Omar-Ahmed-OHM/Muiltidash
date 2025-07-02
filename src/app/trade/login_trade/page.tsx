@@ -1,22 +1,22 @@
 "use client";
-import Container from "../components/Container";
-import { ApiResponse, FieldForm, SignIn,LoginResponse } from "../lib/type";
+import Container from "@/app/components/Container";
+import { ApiResponse, FieldForm,LoginResponse } from '@/app/lib/type';
 import { useState } from "react";
-import FormField from "../components/ui/Formfield";
-import SmartNavbar from "../components/ui/Navbar";
+import FormField from "@/app/components/ui/Formfield";
+import SmartNavbar from "@/app/components/ui/Navbar";
 import Link from "next/link";
-import { Postresponse } from "../lib/methodes";
-import { BaseUrl } from "../components/Baseurl";
+import { Postresponse } from "@/app/lib/methodes";
+import { BaseUrl } from "@/app/components/Baseurl";
 import Cookies from 'js-cookie'
 
-export default function LoginPage() {
+export default function LoginTrader() {
   const [login, setLogin] = useState<Record<string, any>>({});
-const url = `${BaseUrl}users/login`
+const url = `${BaseUrl}traders/login`
   const fields: FieldForm[] = [
     {
-      label: "الايميل",
-      name: "email",
-      type: "email",
+      label: "رقم الهاتف",
+      name: "phoneNumber",
+      type: "text",
       requierd: true,
     },
     {
@@ -58,7 +58,7 @@ const url = `${BaseUrl}users/login`
           >
             <div className="flex flex-col items-center text-center space-y-2">
               <h2 className="text-3xl font-bold text-purple-800">مرحبًا بعودتك</h2>
-              <p className="text-sm text-gray-500">سجّل دخولك للوصول إلى حسابك</p>
+              <p className="text-sm text-gray-500">سجّل دخولك للوصول إلى حسابك كتاجر</p>
             </div>
 
             <FormField fields={fields} data={login} onChange={setLogin} />
@@ -81,7 +81,7 @@ const url = `${BaseUrl}users/login`
              <p className="text-sm text-center mt-4 ">
               لا تمتلك حسابًا؟{" "}
               <Link
-                href="/register"
+                href="/trade/register"
                 className="text-purple-700 hover:underline font-semibold flex justify-center items-center"
                 >
                 إنشاء حساب جديد

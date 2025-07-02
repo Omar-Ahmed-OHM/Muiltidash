@@ -1,1 +1,1 @@
-export const BaseUrl='https://hoorbookapp.com/'
+export const BaseUrl='https://backendb2b.kadinabiye.com/'

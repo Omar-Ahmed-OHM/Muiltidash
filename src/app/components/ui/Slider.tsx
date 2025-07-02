@@ -37,18 +37,25 @@ export const Slider:React.FC<SwiperSliderProps>=({
   <SwiperSlide key={i}>
     <Link href={`/Categories/${src.id}`} className="block w-full h-full">
       <div className={`relative w-full ${height}`}>
-        <Image
-          src={`${BaseUrl}${src.image}`} 
-          alt={`Slide ${i + 1}`}
-          fill
-              className={clsx("rounded-xl", {
+     {src.image ? (
+  <Image
+    src={src.image}
+    alt={`Slide ${i + 1}`}
+    fill
+    className={clsx("rounded-xl", {
       "object-cover": objectFit === "cover",
       "object-contain": objectFit === "contain"
     })}
-          sizes="100vw"
-          priority={i === 0}
-          unoptimized
-        />
+    sizes="100vw"
+    priority={i === 0}
+    unoptimized
+  />
+) : (
+  <div className="flex items-center justify-center w-full h-full bg-gray-100 rounded-xl text-gray-400">
+    لا توجد صورة
+  </div>
+)}
+
       </div>
     </Link>
   </SwiperSlide>

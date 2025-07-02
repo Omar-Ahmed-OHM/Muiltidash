@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
-import Container from "../components/Container";
-import FormField from "../components/ui/Formfield";
-import { ApiResponse, FieldForm, signup_user } from "../lib/type";
+import Container from "@/app/components/Container";
+import FormField from "@/app/components/ui/Formfield";
+import { ApiResponse, FieldForm, signup_user } from "@/app/lib/type";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import SmartNavbar from "../components/ui/Navbar";
-import Logo from "../../../public/asset/images/حورلوجو.jpeg";
-import { Postresponse } from "../lib/methodes";
-import { BaseUrl } from "../components/Baseurl";
+import SmartNavbar from "@/app/components/ui/Navbar";
+import Logo from '../../../../public/asset/images/حورلوجو-1.png'
+import { Postresponse } from "@/app/lib/methodes";
+import { BaseUrl } from "@/app/components/Baseurl";
 
 export default function RegisterPage() {
   const fields: FieldForm[] = [
@@ -21,7 +21,7 @@ export default function RegisterPage() {
   ];
 
   const [formData, setFormData] = useState<Record<string, any>>({});
-const url = `${BaseUrl}users/signup`
+const url = `${BaseUrl}traders/signup`
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     try{

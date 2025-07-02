@@ -38,25 +38,61 @@ export interface Login{
 
 
 //////card type
-export interface CardProps {
-  id: number
-  name: string
-  description: string
-  image: string | StaticImageData
-  price: string
-  originalPrice?: string
-  discount?: number
-  stock?: number
-  soldOut?: boolean
-  love?: boolean
-  handellove?: () => void
-  packet_pieces?: number
-  packet_price?: string
-  piece_price_after_offer?: string | null
-  packet_price_after_offer?: string | null
-  category?: Record<string, any> 
-  reviews_avg?: number
+export interface Product {
+  id: number;
+  category_id: number;
+  category: string;
+  offer: number;
 }
+
+
+export interface main_screen_Product  {
+  _id: string;
+  title: string;
+  traderId: Trader;
+  description: string;
+  price: number;
+  category: string;
+  stockQuantity: number;
+  images: string[];
+  createdAt: string;
+  __v: number;
+};
+
+export interface  Pagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+export interface gethome{
+   products: main_screen_Product[];
+    pagination: Pagination;
+}
+export interface CardProps {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  stockQuantity: number;
+  images: string[];
+  createdAt: string;
+  traderId?: Trader;
+
+  // خصائص إضافية لعرض البطاقة
+  love?: boolean;
+  soldOut?: boolean;
+  reviews_avg?: number;
+  originalPrice?: number;
+  discount?: number;
+  packet_price?: number;
+  packet_price_after_offer?: number;
+  packet_pieces?: number;
+  piece_price_after_offer?: number;
+  handellove?: () => void;
+}
+
 
 ///card type 
 
@@ -75,19 +111,14 @@ export interface CategoryProps {
 
 
 ///// slider type
-export interface Product {
-  id: number;
-  category_id: number;
-  category: string;
-  offer: number;
-}
+
 
 export interface ProductSliderItem {
   id: number;
-  title: string;
+  title?: string;
   image: string;
-  product_id: number;
-  product: Product;
+  product_id?: number;
+  product?: Product;
 }
 
 export interface SwiperSliderProps {
@@ -172,3 +203,51 @@ export interface AddProductState {
 
 }
 
+/// sign in 
+export interface SignIn{
+  phoneNumber:string,
+  password: string
+}
+
+export interface User {
+  name: string;
+  email: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
+}
+
+
+
+/// product id 
+export interface Trader {
+  _id: string;
+  firstName: string;
+  email: string;
+  phoneNumber: string;
+    lastName?: string;
+}
+
+export interface Product {
+  _id: string;
+  title: string;
+  traderId: Trader;
+  description: string;
+  price: number;
+  category: string;
+  stockQuantity: number;
+  images: string[];
+  createdAt: string; 
+  __v: number;
+}
+
+/////////////register
+export interface signup_user {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string; 
+}

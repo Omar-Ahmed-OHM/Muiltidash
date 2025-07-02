@@ -8,9 +8,9 @@ import Logo from '../../../../public/asset/images/حورلوجو-1.png'
 import { Button } from './Button'
 import Link from 'next/link'
 export const Card: React.FC<CardProps> = ({
-  id, name, description, image, category,
+  _id, title, description, images, category,
   price, discount, originalPrice,
-  stock, soldOut = false, love = false, handellove = () => {},
+  stockQuantity, soldOut = false, love = false, handellove = () => {},
   packet_pieces, packet_price, piece_price_after_offer,
   packet_price_after_offer, reviews_avg
 }) => {
@@ -61,26 +61,32 @@ export const Card: React.FC<CardProps> = ({
     <div className="absolute inset-0 bg-[#6B2B7A]/80 flex flex-col items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
       <Image src={Logo} alt="Logo" width={220} height={220} className="w-[120px] h-[120px] object-contain rounded-full mb-4" unoptimized/>
       <div dir="rtl">
-        <Link href={`/Categories/${id}`} className="text-white font-bold text-lg mb-2">
+        <Link href={`/Categories/${_id}`} className="text-white font-bold text-lg mb-2">
           <button className="font-bold text-lg px-6 py-2 rounded-xl bg-[#ffc94d] transition w-full">عرض التفاصيل</button>
         </Link>
       </div>
     </div>
 
     {/* صورة المنتج */}
-    <div className="relative w-full h-56">
-      <Image src={`${BaseUrl}${image}`} alt={name} fill className="object-contain rounded-t-2xl pt-5" unoptimized/>
-    </div>
+  
+<div className="relative w-full h-56 rounded-t-2xl overflow-hidden">
+  <Image
+    src={images?.[0] || '/no-image.png'}
+    alt={title}
+    fill
+    className="object-contain pt-5"
+    unoptimized
+  />
+</div>
 
-    {/* التفاصيل */}
     <div className="p-4 space-y-2 text-left" dir="rtl">
       {category && (
         <span className="text-xs font-medium text-gray-500 uppercase">
-          {typeof category === 'string' ? category : category.name}
+          {/* {typeof category === 'string' ? category : category.name} */}
         </span>
       )}
 
-      <h2 className="text-lg font-semibold text-gray-900 truncate">{name}</h2>
+      <h2 className="text-lg font-semibold text-gray-900 truncate">{title}</h2>
 
       <p className="text-sm text-gray-600 overflow-hidden text-ellipsis whitespace-nowrap">
         {description}
@@ -110,9 +116,9 @@ export const Card: React.FC<CardProps> = ({
         </p>
       )}
 
-      {typeof stock === 'number' && (
-        <p className={`text-xs font-bold ${stock === 0 ? 'text-red-500' : stock <= 4 ? 'text-orange-300' : 'text-gray-600'}`}>
-          {stock === 0 ? 'غير متوفر في المخزن' : stock <= 4 ? `متبقى ${stock} قطعة` : `كمية: ${stock}`}
+      {typeof stockQuantity === 'number' && (
+        <p className={`text-xs font-bold ${stockQuantity === 0 ? 'text-red-500' : stockQuantity <= 4 ? 'text-orange-300' : 'text-gray-600'}`}>
+          {stockQuantity === 0 ? 'غير متوفر في المخزن' : stockQuantity <= 4 ? `متبقى ${stockQuantity} قطعة` : `كمية: ${stockQuantity}`}
         </p>
       )}
 
