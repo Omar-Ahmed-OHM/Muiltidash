@@ -125,7 +125,7 @@ useEffect(() => {
         <p className="text-center text-gray-500 mt-10">لا توجد منتجات</p>
       )}
 
-      <div className="flex gap-4 flex-wrap justify-center">
+      {/* <div className="flex gap-4 flex-wrap justify-center">
         {renderProducts.map((image, index) => (
           <div
             key={index}
@@ -153,7 +153,7 @@ useEffect(() => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Infinite scroll trigger */}
       {isSearching && hasMore && (
