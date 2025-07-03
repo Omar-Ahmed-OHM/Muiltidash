@@ -7,8 +7,8 @@ import SmartNavbar from "../components/ui/Navbar";
 import Link from "next/link";
 import { Postresponse } from "../lib/methodes";
 import { BaseUrl } from "../components/Baseurl";
-import Cookies from 'js-cookie'
-
+import Cookies from 'js-cookie';
+  import toast from 'react-hot-toast';
 export default function LoginPage() {
   const [login, setLogin] = useState<Record<string, any>>({});
 const url = `${BaseUrl}users/login`
@@ -29,6 +29,7 @@ const url = `${BaseUrl}users/login`
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     try{
 
       const res : ApiResponse<LoginResponse>=await Postresponse(url,login);
@@ -39,8 +40,11 @@ const url = `${BaseUrl}users/login`
       Cookies.set("token", token, { expires: 1 }); 
     Cookies.set("email", user.email);
     Cookies.set("name", user.name);
-    }
-    catch (error) {
+     toast.success('تم تسجيل الدخول بنجاح 🎉');
+    
+  }
+  catch (error) {
+      toast.error(  'فشل في تسجيل الدخول');
       console.log(error);
       }
 

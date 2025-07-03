@@ -15,11 +15,11 @@ export const CallApi = async <T = unknown>(
 ) => {
   try {
     const token = getAuthToken();
+    const isFormData = typeof FormData !== "undefined" && data instanceof FormData;
     const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-      // ...(token ? { Authorization: `Bearer ${token}` } : {}), 
-      ...customHeaders,
-    };
+  ...(isFormData ? {} : { "Content-Type": "application/json" }),
+  ...customHeaders,
+};
 
     const config: AxiosRequestConfig = {
       method,

@@ -4,22 +4,30 @@ import { useState } from "react";
 import Container from "@/app/components/Container";
 import { Button } from "@/app/components/ui/Button";
 import FormField from "@/app/components/ui/Formfield";
-import { AddProductState, FieldForm } from "@/app/lib/type";
+import { ApiResponse, Creatproduct, FieldForm } from "@/app/lib/type";
 import { Upload } from "lucide-react";
 import InputField from "@/app/components/ui/Input";
-
+import { CallApi } from "@/app/lib/utilits";
+import { BaseUrl } from "@/app/components/Baseurl";
+import Cookies from 'js-cookie';
+import toast from 'react-hot-toast';
 export default function AddProductPage() {
-  const [data, setData] = useState<AddProductState>({
-    name: "",
+  const [data, setData] = useState<Creatproduct>({
+    title: "",
     description: "",
-    stock: 0,
+    stockQuantity: "",
     price: "",
-    image: "",
+    category: "",
+    images: "", // ← هتتغير تبع الصورة
   });
+
+  const [imageFile, setImageFile] = useState<File | null>(null); // ← صورة واحدة
+
+  const url = `${BaseUrl}products/`;
 
   const fields: FieldForm[] = [
     {
-      name: "name",
+      name: "title", // ← كان مكتوب name وده مش هيشتغل مع الواجهة الحالية
       label: "عنوان المنتج",
       type: "text",
       placeholder: "مثلاً: ساعة نسائية أنيقة",
@@ -31,7 +39,7 @@ export default function AddProductPage() {
       placeholder: "أكتب وصفاً مختصراً للمنتج...",
     },
     {
-      name: "stock",
+      name: "stockQuantity",
       label: "الكمية في المخزون",
       type: "number",
       placeholder: "مثلاً: 25",
@@ -42,45 +50,96 @@ export default function AddProductPage() {
       type: "number",
       placeholder: "مثلاً: 150.00",
     },
+    {
+      name: "category",
+      label: "القسم",
+      type: "text",
+      placeholder: "مثلاً: ساعات",
+    },
   ];
 
   const handleChange = (updatedData: Record<string, any>) => {
     setData((prev) => ({ ...prev, ...updatedData }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("بيانات الإرسال:", data);
-  };
 
-  return (
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const token = Cookies.get("token_admin"); // ← خليها هنا
+
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("description", data.description);
+  formData.append("price", data.price);
+  formData.append("stockQuantity", data.stockQuantity);
+  formData.append("category", data.category);
+
+  if (imageFile) {
+    formData.append("images", imageFile);
+  }
+
+  console.log("Token:", token);
+try{
+
+  const res:ApiResponse<Creatproduct> = await CallApi("post", url, formData, {
+    Authorization: `Bearer ${token}`,
+  });
+   toast.success('تم إضافة المنتج بنجاح 🎉');
+  
+  
+  
+  console.log("Response:", res);
+
+}
+catch(error){
+  console.log(error);
+  alert('Not')
+  
+}
+};
+
+
+   return (
     <Container>
-      <div className="min-h-screen bg-gradient-to-br from-[#faf0ff] via-[#fef8f5] to-[#fff] flex items-center justify-center px-4 pt-24 pb-12">
-        <div className="w-full max-w-4xl bg-white/90 backdrop-blur-md border border-purple-100 rounded-3xl shadow-2xl p-6 sm:p-10 md:p-12 space-y-8">
+      <div className="min-h-screen bg-gradient-to-br from-[#faf0ff] via-[#fef8f5] to-[#fff] flex items-center justify-center px-4 pb-12">
+        <div className="w-full max-w-4xl bg-white/90 backdrop-blur-md border border-purple-100 rounded-3xl shadow-2xl p-6 sm:p-10 md:p-12 space-y-8
+          mx-auto
+        ">
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-[#6B2B7A] mb-2">🚀 إضافة منتج جديد</h2>
-            <p className="text-sm text-gray-500">قم بملء التفاصيل التالية لإضافة منتجك إلى المتجر</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#6B2B7A] mb-2 truncate">
+              🚀 إضافة منتج جديد
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
+              قم بملء التفاصيل التالية لإضافة منتجك إلى المتجر
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* صورة المنتج */}
             <div className="flex flex-col gap-1">
               <label className="font-semibold text-[#6B2B7A]">صورة المنتج</label>
-              <div className="flex items-center gap-2 bg-white-50 px-4 py-2 rounded-xl border border-purple-200 focus-within:ring-2 focus-within:ring-purple-300">
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-purple-200 focus-within:ring-2 focus-within:ring-purple-300">
                 <Upload size={18} className="text-purple-500 shrink-0" />
                 <InputField
-                  onChange={(e) => handleChange({ image: e.target.files?.[0] || "" })}
-                  name="image"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) setImageFile(file);
+                  }}
+                  name="images"
                   type="file"
-                  className="flex-1 text-sm  focus:outline-none text-purple-800 bg-white"
+                  className="flex-1 text-sm focus:outline-none text-purple-800 bg-white"
                 />
               </div>
             </div>
 
-            {/* الحقول الديناميكية */}
-            <FormField fields={fields} data={data} onChange={handleChange} />
+            <FormField
+              fields={fields}
+              data={data}
+              onChange={handleChange}
+            />
 
-            {/* زر الإرسال */}
             <Button
               type="submit"
               classname="w-full bg-gradient-to-r from-[#6B2B7A] to-[#a14bc0] hover:from-[#5c226a] hover:to-[#9444b2] text-white font-bold py-3 text-lg rounded-xl transition duration-300 shadow-md hover:shadow-lg"
@@ -93,3 +152,5 @@ export default function AddProductPage() {
     </Container>
   );
 }
+
+

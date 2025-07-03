@@ -10,6 +10,7 @@ import SmartNavbar from "../components/ui/Navbar";
 import Logo from "../../../public/asset/images/حورلوجو.jpeg";
 import { Postresponse } from "../lib/methodes";
 import { BaseUrl } from "../components/Baseurl";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
   const fields: FieldForm[] = [
@@ -27,10 +28,12 @@ const url = `${BaseUrl}users/signup`
     try{
       const res:ApiResponse<signup_user>=await Postresponse(url,formData);
       console.log(res.data)
+       toast.success('تم تسجيل حسابك بنجاح 🎉');
+
     }
     catch(error){
       console.log(error);
-      
+      toast.error('خطأ فى تسجيل الدخول')
     }
   };
 

@@ -10,7 +10,7 @@ import SmartNavbar from "@/app/components/ui/Navbar";
 import Logo from '../../../../public/asset/images/حورلوجو-1.png'
 import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
-
+import toast from 'react-hot-toast';
 export default function RegisterPage() {
   const fields: FieldForm[] = [
     { name: "firstName", label: "الاسم الاول", type: "text", placeholder: "ادخل اسمك الاول" },
@@ -27,9 +27,11 @@ const url = `${BaseUrl}traders/signup`
     try{
       const res:ApiResponse<signup_user>=await Postresponse(url,formData);
       console.log(res.data)
+       toast.success('تم تسجيل حسابك بنجاح 🎉');
     }
     catch(error){
       console.log(error);
+      toast.error('حدث خطأ في عملية التسجيل');
       
     }
   };

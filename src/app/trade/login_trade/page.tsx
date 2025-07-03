@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 import Cookies from 'js-cookie'
+import toast from "react-hot-toast";
 
 export default function LoginTrader() {
   const [login, setLogin] = useState<Record<string, any>>({});
@@ -36,13 +37,15 @@ const url = `${BaseUrl}traders/login`
       console.log(res.data);
       
       const { token, user } = res.data;
-      Cookies.set("token", token, { expires: 1 }); 
-    Cookies.set("email", user.email);
-    Cookies.set("name", user.name);
+      Cookies.set("token_admin", token, { expires: 1 }); 
+           toast.success('تم تسجيل الدخول بنجاح 🎉');
+
     }
     catch (error) {
       console.log(error);
-      }
+      toast.error(  'فشل في تسجيل الدخول');
+
+    }
 
 
   };

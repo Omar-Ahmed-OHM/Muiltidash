@@ -192,16 +192,7 @@ export interface ProductsState {
   setSearchTerm: (term: string) => void;
   fetchProducts: (reset?: boolean, search?: string) => Promise<void>;
 }
-///// Add product 
-export interface AddProductState {
-  name: string;
-  description: string;
-  price: string;
-  stock: number;
-  image: string | StaticImageData
-  
 
-}
 
 /// sign in 
 export interface SignIn{
@@ -250,4 +241,15 @@ export interface signup_user {
   email: string;
   phoneNumber: string;
   password: string; 
+}
+//// create product 
+
+export interface Creatproduct{
+  title: string;
+  description: string;
+  price: string;
+  category: string;
+  stockQuantity: string;
+  images: string|File[];
+
 }
