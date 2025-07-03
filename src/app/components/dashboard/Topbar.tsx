@@ -3,6 +3,7 @@ import { Bell, User2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import logo from '../../../../public/asset/images/حورلوجو-1.png'
+import Link from 'next/link'
 
 export default function Topbar() {
   return (
@@ -20,6 +21,7 @@ export default function Topbar() {
     >
       {/* جهة الشمال: شعار وترحيب */}
       <div className="flex items-center gap-3">
+        <Link href={'/'}>
         <Image
           src={logo}
           alt="لوجو"
@@ -27,7 +29,8 @@ export default function Topbar() {
           height={36}
           className="rounded-full shadow-md"
           unoptimized
-        />
+          />
+          </Link>
         <h1 className="text-sm sm:text-base font-bold text-[#6B2B7A] truncate max-w-xs sm:max-w-md">
           أهلاً بك في لوحة التحكم 👋
         </h1>

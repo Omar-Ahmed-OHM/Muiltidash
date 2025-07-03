@@ -8,10 +8,12 @@ import Link from "next/link";
 import { Postresponse } from "../lib/methodes";
 import { BaseUrl } from "../components/Baseurl";
 import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation";
   import toast from 'react-hot-toast';
 export default function LoginPage() {
   const [login, setLogin] = useState<Record<string, any>>({});
 const url = `${BaseUrl}users/login`
+  const router = useRouter();
   const fields: FieldForm[] = [
     {
       label: "الايميل",
@@ -41,7 +43,7 @@ const url = `${BaseUrl}users/login`
     Cookies.set("email", user.email);
     Cookies.set("name", user.name);
      toast.success('تم تسجيل الدخول بنجاح 🎉');
-    
+      router.push("/admin/add-product");
   }
   catch (error) {
       toast.error(  'فشل في تسجيل الدخول');
