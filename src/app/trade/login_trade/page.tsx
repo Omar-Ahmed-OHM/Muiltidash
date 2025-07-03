@@ -44,7 +44,6 @@ const url = `${BaseUrl}traders/login`
     catch (error) {
       console.log(error);
       toast.error(  'فشل في تسجيل الدخول');
-
     }
 
 
