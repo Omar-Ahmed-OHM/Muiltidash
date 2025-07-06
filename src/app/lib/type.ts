@@ -210,6 +210,14 @@ export interface LoginResponse {
   user: User;
 }
 
+export interface registerres {
+  token?:string;
+    firstName: string,
+    lastName: string,
+    email: string,
+  phoneNumber: string,
+    password: string
+}
 
 
 /// product id 
@@ -242,6 +250,7 @@ export interface signup_user {
   email: string;
   phoneNumber: string;
   password: string; 
+  token?:string;
 }
 //// create product 
 

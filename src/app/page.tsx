@@ -129,7 +129,7 @@ export default function HomePage() {
         </div>
 
         {/* Slider Section */}
-        <div className="w-full bg-white pt-4">
+        <div className="w-full bg-white pt-4 mt-28">
           <div className="max-w-screen-xl mx-auto p-5 text-black z-[10000]">
             {productSliderItems.length > 0 && (
               <Slider
@@ -147,7 +147,7 @@ export default function HomePage() {
         {/* Best Selling Products */}
        {/* Best Selling Products */}
 <div className="w-full bg-white mt-6 relative shadow-sm rounded-xl">
-  <div className="flex justify-center items-center text-2xl mb-4">
+  <div className="flex justify-center items-center text-2xl mb-4 ">
     <h2 className="text-btn-color font-bold text-[26px] sm:text-[30px] mb-4 tracking-tight">الأكثر مبيعاً</h2>
   </div>
 

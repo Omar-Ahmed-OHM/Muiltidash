@@ -12,6 +12,8 @@ import Logo from '../../../../public/asset/images/حورلوجو-1.png'
 import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 import toast from 'react-hot-toast';
+import Cookies from 'js-cookie'
+
 export default function RegisterPage() {
   const router = useRouter();
 
@@ -30,10 +32,17 @@ const url = `${BaseUrl}traders/signup`
     try{
       const res:ApiResponse<signup_user>=await Postresponse(url,formData);
       console.log(res.data)
-       toast.success('تم تسجيل حسابك بنجاح 🎉');
-             router.push("/admin/add-product");
+         const { token } = res.data;
+      if (token) {
+        Cookies.set("token_admin", token, { expires: 1 }); 
+        toast.success('تم تسجيل الدخول بنجاح 🎉');
+        router.push("/admin/add-product");
+      } else {
+        toast.error('لم يتم استلام رمز الدخول من الخادم');
+      }
 
     }
+    
     catch(error){
       console.log(error);
       toast.error('حدث خطأ في عملية التسجيل');
