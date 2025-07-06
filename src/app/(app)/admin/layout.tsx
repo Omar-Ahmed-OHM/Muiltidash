@@ -1,6 +1,5 @@
 import Sidebar from "@/app/components/dashboard/Sidebar";
 import Topbar from "@/app/components/dashboard/Topbar";
-import { Toaster } from 'react-hot-toast';
 import type { Metadata } from "next";
 import { Tajawal } from "next/font/google";
 const tajawal = Tajawal({
@@ -21,19 +20,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ar" dir="rtl">
-        
-      <body className={`${tajawal.variable} font-sans antialiased`}>
- <Toaster position="top-right" />
+ return (
     <div className="flex flex-row-reverse">
-      <div className="flex-1 ml-0 mr-64 bg-gradient-to-br from-purple-50 to-orange-50 min-h-screen">
+      <div className="flex-1 ml-0 lg:mr-64 bg-gradient-to-br from-purple-50 to-orange-50 min-h-screen">
         <Topbar />
-        <main className="pt-20 p-6 w-full" >{children}</main>
+        <main className="pt-20 p-6 w-full">{children}</main>
       </div>
       <Sidebar />
     </div>
-      </body>
-    </html>
-  );
+    )
 }

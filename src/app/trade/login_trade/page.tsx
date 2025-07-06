@@ -9,10 +9,14 @@ import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 import Cookies from 'js-cookie'
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 export default function LoginTrader() {
   const [login, setLogin] = useState<Record<string, any>>({});
 const url = `${BaseUrl}traders/login`
+  const router = useRouter();
+
   const fields: FieldForm[] = [
     {
       label: "رقم الهاتف",
@@ -39,6 +43,7 @@ const url = `${BaseUrl}traders/login`
       const { token, user } = res.data;
       Cookies.set("token_admin", token, { expires: 1 }); 
            toast.success('تم تسجيل الدخول بنجاح 🎉');
+                 router.push("/admin/add-product");
 
     }
     catch (error) {

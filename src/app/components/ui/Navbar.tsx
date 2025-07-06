@@ -54,7 +54,7 @@ const SmartNavbar = () => {
         {/* الأيقونات */}
         <div className="flex items-center gap-4 text-white text-xs sm:text-sm">
           <Link
-            href="/register"
+            href="/trade/register"
             className="flex flex-col items-center hover:text-yellow-400 transition transform hover:scale-110"
           >
             <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition">

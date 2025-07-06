@@ -6,12 +6,15 @@ import { ApiResponse, FieldForm, signup_user } from "@/app/lib/type";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import SmartNavbar from "@/app/components/ui/Navbar";
 import Logo from '../../../../public/asset/images/حورلوجو-1.png'
 import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 import toast from 'react-hot-toast';
 export default function RegisterPage() {
+  const router = useRouter();
+
   const fields: FieldForm[] = [
     { name: "firstName", label: "الاسم الاول", type: "text", placeholder: "ادخل اسمك الاول" },
     { name: "lastName", label: "الاسم الاخير", type: "text", placeholder: "ادخل اسمك الاخير" },
@@ -28,6 +31,8 @@ const url = `${BaseUrl}traders/signup`
       const res:ApiResponse<signup_user>=await Postresponse(url,formData);
       console.log(res.data)
        toast.success('تم تسجيل حسابك بنجاح 🎉');
+             router.push("/admin/add-product");
+
     }
     catch(error){
       console.log(error);
@@ -83,7 +88,7 @@ const url = `${BaseUrl}traders/signup`
 
             <p className="text-center text-sm text-gray-700">
               لديك حساب بالفعل؟{" "}
-              <Link href="/login">
+              <Link href="/trade/login_trade">
                 <span className="text-purple-700 font-semibold underline cursor-pointer hover:text-orange-500 transition">
                   تسجيل الدخول
                 </span>

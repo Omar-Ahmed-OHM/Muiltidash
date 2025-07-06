@@ -7,8 +7,8 @@ import { useState } from 'react'
 const navItems = [
   { href: '/admin', label: 'الرئيسية', icon: LayoutDashboard },
   { href: '/admin/add-product', label: 'إضافة منتج', icon: PackagePlus },
-  { href: '/admin/settings', label: 'الإعدادات', icon: Settings },
-  { href: '/admin/setting', label: 'عرض المنتجات', icon: View },
+  // { href: '/admin/update', label: 'الإعدادات', icon: Settings },
+  { href: '/admin/view', label: 'عرض المنتجات', icon: View },
 ]
 
 export default function Sidebar() {

@@ -81,7 +81,7 @@ const url = `${BaseUrl}users/signup`
 
             <p className="text-center text-sm text-gray-700">
               لديك حساب بالفعل؟{" "}
-              <Link href="/login">
+              <Link href="/trade/login_trade">
                 <span className="text-purple-700 font-semibold underline cursor-pointer hover:text-orange-500 transition">
                   تسجيل الدخول
                 </span>

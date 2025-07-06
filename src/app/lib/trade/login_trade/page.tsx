@@ -36,7 +36,7 @@ const url = `${BaseUrl}traders/login`
       console.log(res.data);
       
       const { token } = res.data;
-      Cookies.set("token trader", token, { expires: 1 }); 
+      Cookies.set("token_trader", token, { expires: 1 }); 
     }
     catch (error) {
       console.log(error);

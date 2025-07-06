@@ -219,6 +219,7 @@ export interface Trader {
   email: string;
   phoneNumber: string;
     lastName?: string;
+    createdAt?:string
 }
 
 export interface Product {
@@ -251,5 +252,36 @@ export interface Creatproduct{
   category: string;
   stockQuantity: string;
   images: string|File[];
+
+}
+
+
+//// create order 
+
+export interface CreateOrder {
+  productId: string,
+  quantity: number,
+  totalPrice: number
+}
+
+
+export interface getproduct{
+  _id:number,
+  title:string,
+  traderId:Trader,
+  description:string,
+  price:number,
+  category:string,
+  stockQuantity:number,
+  images:string[],
+  createdAt:string;
+}
+export interface updateproduct{
+  
+  title: string,
+  description:string,
+  price: number,
+  category: string,
+  stockQuantity: number
 
 }

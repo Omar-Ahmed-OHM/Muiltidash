@@ -41,7 +41,6 @@ const url = `${BaseUrl}users/login`
       const { token, user } = res.data;
       Cookies.set("token", token, { expires: 1 }); 
     Cookies.set("email", user.email);
-    Cookies.set("name", user.name);
      toast.success('تم تسجيل الدخول بنجاح 🎉');
       router.push("/admin/add-product");
   }

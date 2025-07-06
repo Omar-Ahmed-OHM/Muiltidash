@@ -27,7 +27,7 @@ export default function AddProductPage() {
 
   const fields: FieldForm[] = [
     {
-      name: "title", // ← كان مكتوب name وده مش هيشتغل مع الواجهة الحالية
+      name: "title", 
       label: "عنوان المنتج",
       type: "text",
       placeholder: "مثلاً: ساعة نسائية أنيقة",
