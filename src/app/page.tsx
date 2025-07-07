@@ -16,17 +16,26 @@ import 'swiper/css/navigation';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import SmartNavbar from "./components/ui/Navbar";
 import Footer from "./components/ui/Footer";
-import { ApiResponse, gethome, Pagination, ProductSliderItem, main_screen_Product } from "./lib/type";
+import { ApiResponse, gethome, Pagination, ProductSliderItem, main_screen_Product, AddFavorit } from "./lib/type";
 import { BaseUrl } from "./components/Baseurl";
 import { fetchData } from "./lib/methodes";
-
+import { CallApi } from "./lib/utilits";
+import Cookies from 'js-cookie'
+import axios from "axios";
+import toast from "react-hot-toast";
 export default function HomePage() {
   const [showLogo, setShowLogo] = useState(true);
-
   const [products, setProducts] = useState<main_screen_Product[]>([]);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [add,setadd]=useState<boolean>(false);
+
+
+
+
+  const urlfav = `${BaseUrl}users/favorites`;
+  const token = Cookies.get("token");
 
   const productSliderItems: ProductSliderItem[] = [
     {
@@ -62,7 +71,6 @@ export default function HomePage() {
     }
   }, []);
 
-  // Fetch products with pagination
   const fetchProducts = async () => {
     if (loadingMore || !hasMore) return;
     setLoadingMore(true);
@@ -106,6 +114,71 @@ export default function HomePage() {
 
   if (showLogo) return <LogoImageAnimation />;
   if (products.length === 0 && !loadingMore) return <SliderSkeleton />;
+
+
+
+
+
+if(add){
+
+  const handelfavorit=async(id:string)=>{
+    try{
+      const res:ApiResponse<AddFavorit>=await axios.post(urlfav, {productId:id}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      console.log(res.data);   
+      toast.success("تم الاضافه للمفضله")   
+    }
+    catch(error){
+      console.error("Error fetching products:", error);
+    }
+  }
+}
+else{
+  const handeldelete=async(id:string)=>{
+    try{
+      const res:ApiResponse<AddFavorit>=await axios.delete(`${BaseUrl}user/favorites`, {
+        data: { productId: id },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      
+    }
+    catch(error){
+      console.error("Error fetching products:", error);
+    }
+  }
+}
+
+
+  const handelfavorit = async (id: string) => {
+    try {
+      if (!add) {
+        // Add to favorites
+        const res: ApiResponse<AddFavorit> = await axios.post(urlfav, { productId: id }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(res.data);
+      } else {
+        // Remove from favorites
+        const res: ApiResponse<AddFavorit> = await axios.delete(`${BaseUrl}user/favorites`, {
+          data: { productId: id },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(res.data);
+      }
+      setadd(!add);
+    } catch (error) {
+      console.error("Error updating favorites:", error);
+    }
+  };
 
   return (
     <section className="bg-white">
@@ -154,7 +227,7 @@ export default function HomePage() {
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 px-4 sm:px-6 lg:px-8 pb-8">
     {products.map((product, index) => (
       <div key={index} className="transition-all duration-300 hover:scale-[1.02] hover:shadow-md">
-        <Card {...product} handellove={() => console.log(`Liked product ${product._id}`)} />
+        <Card {...product} handellove={() => { handelfavorit(String(product._id)); setadd(!add); }} />
       </div>
     ))}
   </div>

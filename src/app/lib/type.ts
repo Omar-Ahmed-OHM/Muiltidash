@@ -294,3 +294,52 @@ export interface updateproduct{
   stockQuantity: number
 
 }
+export interface AddFavorit{
+  productId:string;
+}
+
+
+
+
+// types.ts
+export interface Productshoping {
+  _id: string;
+  title: string;
+  traderId: string;
+  description: string;
+  price: number;
+  category: string;
+  stockQuantity: number;
+  images: string[];
+  createdAt: string;
+  __v: number;
+}
+
+export interface Ordershoping {
+  _id: string;
+  userId: string;
+  productId: Product;
+  quantity: number;
+  totalPrice: number;
+  orderDate: string;
+  __v: number;
+}
+
+export interface CartAndOrdersResponseshoping {
+  cart: Productshoping[];
+  orders: Ordershoping[];
+}
+
+export interface ProductWithType {
+  _id: string;
+  title: string;
+  traderId: string;
+  description: string;
+  price: number;
+  category: string;
+  stockQuantity: number;
+  images: string[];
+  createdAt: string;
+  __v: number;
+  type: 'cart' | 'order';
+}
