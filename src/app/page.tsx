@@ -19,10 +19,10 @@ import Footer from "./components/ui/Footer";
 import { ApiResponse, gethome, Pagination, ProductSliderItem, main_screen_Product, AddFavorit } from "./lib/type";
 import { BaseUrl } from "./components/Baseurl";
 import { fetchData } from "./lib/methodes";
-import { CallApi } from "./lib/utilits";
 import Cookies from 'js-cookie'
 import axios from "axios";
 import toast from "react-hot-toast";
+import { LoginRequiredModal } from "./components/ui/Pop-up-login";
 export default function HomePage() {
   const [showLogo, setShowLogo] = useState(true);
   const [products, setProducts] = useState<main_screen_Product[]>([]);
@@ -30,7 +30,7 @@ export default function HomePage() {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [add,setadd]=useState<boolean>(false);
-
+  const [register,setregister]=useState<boolean>(false)
 
 
 
@@ -156,6 +156,13 @@ else{
 
   const handelfavorit = async (id: string) => {
     try {
+      if(!token){
+        setregister(true);
+        return;
+      }
+      else{
+        setregister(false);
+      }
       if (!add) {
         // Add to favorites
         const res: ApiResponse<AddFavorit> = await axios.post(urlfav, { productId: id }, {
@@ -238,7 +245,7 @@ else{
     </div>
   )}
 </div>
-
+<LoginRequiredModal show={register}/>
       </Container>
       <Footer />
     </section>

@@ -27,29 +27,54 @@ export default function RegisterPage() {
 
   const [formData, setFormData] = useState<Record<string, any>>({});
 const url = `${BaseUrl}traders/signup`
-  const handleSubmit = async(e: React.FormEvent) => {
-    e.preventDefault();
-    try{
-      const res:ApiResponse<signup_user>=await Postresponse(url,formData);
-      console.log(res.data)
-         const { token } = res.data;
-      if (token) {
-        Cookies.set("token_admin", token, { expires: 1 }); 
-        toast.success('تم تسجيل الدخول بنجاح 🎉');
-        router.push("/admin/add-product");
-      } else {
-        toast.error('لم يتم استلام رمز الدخول من الخادم');
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res: ApiResponse<signup_user> = await Postresponse(url, formData);
+
+    console.log('Status:', res.status);
+    console.log('Data:', res.data);
+
+    switch (res.status) {
+      case 200:
+      case 201: {
+        const { token } = res.data;
+        if (token) {
+          Cookies.set("token_admin", token, { expires: 1 }); 
+          toast.success('تم تسجيل الدخول بنجاح 🎉');
+          router.push("/admin/add-product");
+        } else {
+          toast.error('لم يتم استلام رمز الدخول من الخادم');
+        }
+        break;
       }
 
-    }
-    
-    catch(error){
-      console.log(error);
-      toast.error('حدث خطأ في عملية التسجيل');
-      
-    }
-  };
+      case 400:
+        toast.error('البيانات غير صحيحة، تحقق من الإدخال');
+        break;
 
+      case 401:
+        toast.error('غير مصرح، تحقق من البريد أو كلمة المرور');
+        break;
+
+      case 409:
+        toast.error('المستخدم موجود بالفعل');
+        break;
+
+      case 500:
+        toast.error('خطأ في السيرفر، حاول لاحقًا');
+        break;
+
+      default:
+        toast.error(`خطأ غير معروف: ${res.status}`);
+        break;
+    }
+
+  } catch (error: any) {
+    console.log(error);
+    toast.error('حدث خطأ في عملية التسجيل');
+  }
+};
   return (
     <>
       <SmartNavbar />

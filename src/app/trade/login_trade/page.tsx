@@ -32,27 +32,43 @@ const url = `${BaseUrl}traders/login`
     },
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try{
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res: ApiResponse<LoginResponse> = await Postresponse(url, login);
 
-      const res : ApiResponse<LoginResponse>=await Postresponse(url,login);
-      console.log(res.message);
-      console.log(res.data);
-      
+    if (res.status === 200) {
       const { token, user } = res.data;
-      Cookies.set("token_admin", token, { expires: 1 }); 
-           toast.success('تم تسجيل الدخول بنجاح 🎉');
-                 router.push("/admin/add-product");
 
+      Cookies.set('token_admin', token, {
+        expires: 1,
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Strict',
+      });
+
+      toast.success('تم تسجيل الدخول بنجاح 🎉');
+      router.push("/admin/add-product");
+    } 
+    else if (res.status === 401) {
+      toast.error('بيانات الدخول غير صحيحة ❌');
+    } 
+    else if (res.status === 400) {
+      toast.error('طلب غير صالح، تحقق من البيانات');
+    } 
+    else if (res.status === 500) {
+      toast.error('حدث خطأ في السيرفر 😓');
+    } 
+    else {
+      toast.error(`حدث خطأ غير متوقع: ${res.status}`);
     }
-    catch (error) {
-      console.log(error);
-      toast.error(  'فشل في تسجيل الدخول');
-    }
 
+  } catch (error: any) {
+    console.log(error);
+    toast.error('فشل في تسجيل الدخول');
+  }
+};
 
-  };
   return (
     <>
       <SmartNavbar />

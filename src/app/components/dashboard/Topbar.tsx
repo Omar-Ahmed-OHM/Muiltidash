@@ -4,8 +4,13 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import logo from '../../../../public/asset/images/حورلوجو-1.png'
 import Link from 'next/link'
-
+import Cookies from 'js-cookie';
 export default function Topbar() {
+  const logout=()=>{
+    Cookies.remove('token_admin');
+    console.log("log out");
+    
+  }
   return (
     <div
       dir="rtl"
@@ -53,7 +58,7 @@ export default function Topbar() {
           className="p-2 rounded-full hover:bg-[#EEDCFB] transition-colors"
           aria-label="حساب المستخدم"
         >
-          <User2 size={20} />
+          <User2 size={20} onClick={logout}/>
         </motion.button>
       </div>
     </div>
