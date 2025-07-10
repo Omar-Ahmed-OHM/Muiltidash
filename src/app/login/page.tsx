@@ -24,7 +24,7 @@ const url = `${BaseUrl}users/login`
     {
       label: "كلمة المرور",
       name: "password",
-      type: "text",
+      type: "password",
       requierd: true,
     },
   ];
@@ -42,7 +42,7 @@ const url = `${BaseUrl}users/login`
       Cookies.set("token", token, { expires: 1 }); 
     Cookies.set("email", user.email);
      toast.success('تم تسجيل الدخول بنجاح 🎉');
-      router.push("/admin/add-product");
+      router.push("/");
   }
   catch (error) {
       toast.error(  'فشل في تسجيل الدخول');

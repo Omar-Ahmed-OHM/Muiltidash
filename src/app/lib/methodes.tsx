@@ -1,6 +1,6 @@
 import { CallApi } from "./utilits";
 
-export const fetchData = async <T = unknown>(APIURL: string): Promise<T> => {
+export const fetchData = async <T = unknown>(url: () => string | undefined, p0: { headers: { Authorization: string; }; }, APIURL: string): Promise<T> => {
   try {
     const res: T = await CallApi("get", `${APIURL}`);
   
@@ -37,7 +37,7 @@ export const PutResponse = async <T = unknown, R = unknown>(APIURL: string, data
   }
 };
 
-export const DeleteResponse = async <R = unknown>(APIURL: string): Promise<R> => {
+export const DeleteResponse = async <R = unknown>(APIURL: string, p0: { headers: { Authorization: string; }; }): Promise<R> => {
   try {
     const res: R = await CallApi("delete", `${APIURL}`);
     if (!res) {

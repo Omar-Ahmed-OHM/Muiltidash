@@ -34,7 +34,7 @@ export default function ProductDetailsPage() {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res: ApiResponse<Product> = await fetchData(url);
+        const res: ApiResponse<Product> = await CallApi("get",url);
         setDetails(res.data);
       } catch (error) {
         console.error(error);

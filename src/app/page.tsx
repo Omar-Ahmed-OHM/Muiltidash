@@ -23,6 +23,7 @@ import Cookies from 'js-cookie'
 import axios from "axios";
 import toast from "react-hot-toast";
 import { LoginRequiredModal } from "./components/ui/Pop-up-login";
+import { CallApi } from "./lib/utilits";
 export default function HomePage() {
   const [showLogo, setShowLogo] = useState(true);
   const [products, setProducts] = useState<main_screen_Product[]>([]);
@@ -76,7 +77,7 @@ export default function HomePage() {
     setLoadingMore(true);
 
     try {
-      const res: ApiResponse<gethome> = await fetchData(`${BaseUrl}main/main-screen?page=${page}&limit=10`);
+      const res: ApiResponse<gethome> = await CallApi("get",`${BaseUrl}main/main-screen?page=${page}&limit=10`);
       const newProducts = res.data.products;
 
       setProducts(prev => [...prev, ...newProducts]);
@@ -231,7 +232,7 @@ else{
     <h2 className="text-btn-color font-bold text-[26px] sm:text-[30px] mb-4 tracking-tight">الأكثر مبيعاً</h2>
   </div>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 px-4 sm:px-6 lg:px-8 pb-8">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8 pb-8">
     {products.map((product, index) => (
       <div key={index} className="transition-all duration-300 hover:scale-[1.02] hover:shadow-md">
         <Card {...product} handellove={() => { handelfavorit(String(product._id)); setadd(!add); }} />

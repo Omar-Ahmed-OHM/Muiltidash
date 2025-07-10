@@ -11,6 +11,7 @@ import Logo from "../../../public/asset/images/حورلوجو.jpeg";
 import { Postresponse } from "../lib/methodes";
 import { BaseUrl } from "../components/Baseurl";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const fields: FieldForm[] = [
@@ -20,7 +21,7 @@ export default function RegisterPage() {
     { name: "phoneNumber", label: "رقم الهاتف", type: "text", placeholder: "ادخل رقم هاتفك" },
     { name: "password", label: "الرقم السري", type: "password", placeholder: "ادخل الرقم السري" },
   ];
-
+const router=useRouter();
   const [formData, setFormData] = useState<Record<string, any>>({});
 const url = `${BaseUrl}users/signup`
   const handleSubmit = async(e: React.FormEvent) => {
@@ -29,6 +30,7 @@ const url = `${BaseUrl}users/signup`
       const res:ApiResponse<signup_user>=await Postresponse(url,formData);
       console.log(res.data)
        toast.success('تم تسجيل حسابك بنجاح 🎉');
+        router.push("/login");
 
     }
     catch(error){

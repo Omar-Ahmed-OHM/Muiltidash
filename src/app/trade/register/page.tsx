@@ -12,7 +12,7 @@ import Logo from '../../../../public/asset/images/حورلوجو-1.png'
 import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 import toast from 'react-hot-toast';
-import Cookies from 'js-cookie'
+import axios from "axios";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -29,45 +29,34 @@ export default function RegisterPage() {
 const url = `${BaseUrl}traders/signup`
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+  console.log(formData);
   try {
-    const res: ApiResponse<signup_user> = await Postresponse(url, formData);
-
-    console.log('Status:', res.status);
-    console.log('Data:', res.data);
-
-    switch (res.status) {
-      case 200:
-      case 201: {
-        const { token } = res.data;
-        if (token) {
-          Cookies.set("token_admin", token, { expires: 1 }); 
-          toast.success('تم تسجيل الدخول بنجاح 🎉');
-          router.push("/admin/add-product");
-        } else {
-          toast.error('لم يتم استلام رمز الدخول من الخادم');
-        }
-        break;
+    const res: ApiResponse<signup_user> = await axios.post(url, formData,
+      {
+        validateStatus: () => true,
       }
+    );
+    console.log('Data:', typeof(res.data));
 
-      case 400:
-        toast.error('البيانات غير صحيحة، تحقق من الإدخال');
-        break;
+    const status = res.status;
 
-      case 401:
-        toast.error('غير مصرح، تحقق من البريد أو كلمة المرور');
-        break;
+    if (status === 200 || status === 201) {
+        toast.success('تم تسجيل الدخول بنجاح 🎉');
+        router.push("/login-trader");
+    } else if (status === 400) {
+      toast.error('البيانات غير صحيحة، تحقق من الإدخال');
 
-      case 409:
-        toast.error('المستخدم موجود بالفعل');
-        break;
+    } else if (status === 401) {
+      toast.error('غير مصرح، تحقق من البريد أو كلمة المرور');
 
-      case 500:
-        toast.error('خطأ في السيرفر، حاول لاحقًا');
-        break;
+    } else if (status === 409) {
+      toast.error('المستخدم موجود بالفعل');
 
-      default:
-        toast.error(`خطأ غير معروف: ${res.status}`);
-        break;
+    } else if (status === 500) {
+      toast.error('خطأ في السيرفر، حاول لاحقًا');
+
+    } else {
+      toast.error(`خطأ غير معروف: ${status}`);
     }
 
   } catch (error: any) {
@@ -75,6 +64,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     toast.error('حدث خطأ في عملية التسجيل');
   }
 };
+
   return (
     <>
       <SmartNavbar />

@@ -10,6 +10,7 @@ import { BaseUrl } from "@/app/components/Baseurl";
 import Cookies from 'js-cookie'
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 
 export default function LoginTrader() {
@@ -27,24 +28,24 @@ const url = `${BaseUrl}traders/login`
     {
       label: "كلمة المرور",
       name: "password",
-      type: "text",
+      type: "password",
       requierd: true,
     },
   ];
 
 const handleSubmit = async (e: React.FormEvent) => {
+
   e.preventDefault();
   try {
-    const res: ApiResponse<LoginResponse> = await Postresponse(url, login);
-
-    if (res.status === 200) {
-      const { token, user } = res.data;
+    const res = await axios.post(url, login);
+const { token } = res.data.data;
+    if (res.status === 200||res.status===201) {
 
       Cookies.set('token_admin', token, {
         expires: 1,
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'Strict',
+         path: '/',
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'Strict',
       });
 
       toast.success('تم تسجيل الدخول بنجاح 🎉');

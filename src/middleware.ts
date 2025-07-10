@@ -9,10 +9,11 @@ export function middleware(request: NextRequest) {
   if (!token) {
     return NextResponse.redirect(new URL('/trade/login_trade', request.url));
   }
-  if(!token_user){
-    return NextResponse.redirect(new URL('/login',request.url));
-  }
+  
 
+  if(token_user&&!token){
+    return NextResponse.redirect(new URL('/',request.url));
+  }
   return NextResponse.next();
 }
 

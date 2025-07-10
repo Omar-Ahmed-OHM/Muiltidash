@@ -4,18 +4,25 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, Heart, User2 } from 'lucide-react';
 import Logo from '../../../../public/asset/images/حورلوجو-1.png';
-
+import { motion, AnimatePresence } from 'framer-motion';
+import Cookies from 'js-cookie'; 
+import { useRouter } from 'next/navigation';
 const SmartNavbar = () => {
+  const router=useRouter();
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [showModal, setShowModal] = useState(false); // ⬅️ لإظهار/إخفاء المودال
-
+  const [showModal, setShowModal] = useState(false); 
+    const token = Cookies.get("token");
   const controlNavbar = () => {
     const currentScrollY = window.scrollY;
     setVisible(currentScrollY < lastScrollY || currentScrollY < 80);
     setLastScrollY(currentScrollY);
   };
-
+const handleLogout = () => {
+    Cookies.remove("token");
+    setShowModal(false);
+    router.push('/')
+  };
   useEffect(() => {
     window.addEventListener('scroll', controlNavbar);
     return () => window.removeEventListener('scroll', controlNavbar);
@@ -100,35 +107,75 @@ const SmartNavbar = () => {
       </header>
 
       {/* المودال لاختيار نوع التسجيل */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 shadow-xl w-[90%] max-w-sm text-center">
-            <h2 className="text-xl font-bold text-[#6B2B7A] mb-4">اختر نوع التسجيل</h2>
-            <div className="flex flex-col gap-4">
-              <Link
-                href="/register"
-                className="bg-purple-600 text-white py-2 rounded-full hover:bg-purple-700 transition"
-              >
-                التسجيل كمستخدم
-              </Link>
-              <Link
-                href="/trade/register"
-                className="bg-yellow-500 text-white py-2 rounded-full hover:bg-yellow-600 transition"
-              >
-                التسجيل كتاجر
-              </Link>
-              <button
-                onClick={() => setShowModal(false)}
-                className="text-sm text-gray-500 mt-2 hover:underline"
-              >
-                إلغاء
-              </button>
-            </div>
+ <AnimatePresence>
+  {showModal && (
+    <motion.div
+      key="modal"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      onClick={() => setShowModal(false)}
+    >
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -20, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white rounded-2xl p-6 shadow-xl w-[90%] max-w-sm text-center"
+      >
+        <h2 className="text-xl font-bold text-[#6B2B7A] mb-4">
+          {token ? 'مرحباً 👋' : 'اختر نوع التسجيل'}
+        </h2>
+
+        {token ? (
+          <div className="flex flex-col gap-4">
+            <Link
+              href="/admin"
+              className="bg-purple-600 text-white py-2 rounded-full hover:bg-purple-700 transition"
+            >
+              لوحة تحكم الأدمن
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white py-2 rounded-full hover:bg-red-600 transition"
+            >
+              تسجيل الخروج
+            </button>
+            <button
+              onClick={() => setShowModal(false)}
+              className="text-sm text-gray-500 mt-2 hover:underline"
+            >
+              إلغاء
+            </button>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="flex flex-col gap-4">
+            <Link
+              href="/register"
+              className="bg-purple-600 text-white py-2 rounded-full hover:bg-purple-700 transition"
+            >
+              التسجيل كمستخدم
+            </Link>
+            <Link
+              href="/trade/register"
+              className="bg-yellow-500 text-white py-2 rounded-full hover:bg-yellow-600 transition"
+            >
+              التسجيل كتاجر
+            </Link>
+            <button
+              onClick={() => setShowModal(false)}
+              className="text-sm text-gray-500 mt-2 hover:underline"
+            >
+              إلغاء
+            </button>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </>
   );
 };
-
 export default SmartNavbar;

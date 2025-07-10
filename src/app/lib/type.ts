@@ -18,7 +18,7 @@ export interface ApiResponse<T>{
 export interface FieldForm {
   name: string;
   label: string;
-  type: "text" | "number" | "email" | "select"|"password";
+  type: "text" | "number" | "email" | "select"|"password"|'phoneNumber';
   options?: string[];       
   fetchUrl?: string;
   placeholder?:string 
@@ -343,4 +343,18 @@ export interface ProductWithType {
   createdAt: string;
   __v: number;
   type: 'cart' | 'order';
+}
+
+
+export interface OrderItem {
+  _id: string;
+  userId: string;
+  productId: string;
+  traderId: string;
+  quantity: number;
+  totalPrice: number;
+  status: 'Pending' | 'Confirmed' | 'Shipped' | 'Delivered' | 'Cancelled'; // أو أي حالات أخرى عندك
+  paymentState: 'Pending' | 'Paid' | 'Failed'; // حسب حالتك
+  orderDate: string; // ISO date string
+  __v: number;
 }
