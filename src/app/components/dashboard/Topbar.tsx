@@ -6,17 +6,17 @@ import logo from '../../../../public/asset/images/حورلوجو-1.png'
 import Link from 'next/link'
 import Cookies from 'js-cookie';
 import { useState, useRef, useEffect } from 'react'
-
+import { useRouter } from 'next/navigation'
 export default function Topbar() {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
+  const router=useRouter();
   const logout = () => {
     Cookies.remove('token_admin');
+    router.push('/');
     setOpenMenu(false);
   }
 
-  // ⛔️ إغلاق القائمة عند الضغط خارجها
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {

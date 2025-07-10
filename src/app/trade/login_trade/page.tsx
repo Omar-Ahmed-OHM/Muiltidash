@@ -49,7 +49,7 @@ const { token } = res.data.data;
       });
 
       toast.success('تم تسجيل الدخول بنجاح 🎉');
-      router.push("/admin/add-product");
+      router.push("/admin");
     } 
     else if (res.status === 401) {
       toast.error('بيانات الدخول غير صحيحة ❌');

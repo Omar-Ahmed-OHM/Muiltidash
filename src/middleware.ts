@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  console.log('✅ middleware is working');
 
   const token = request.cookies.get('token_admin')?.value;
   const token_user = request.cookies.get('token')?.value;
