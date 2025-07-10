@@ -13,6 +13,7 @@ const SmartNavbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showModal, setShowModal] = useState(false); 
     const token = Cookies.get("token");
+    const token_admin = Cookies.get("token_admin");
   const controlNavbar = () => {
     const currentScrollY = window.scrollY;
     setVisible(currentScrollY < lastScrollY || currentScrollY < 80);

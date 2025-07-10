@@ -1,21 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  const tokenAdmin = request.cookies.get('token_admin')?.value;
 
-  const token = request.cookies.get('token_admin')?.value;
-  const token_user = request.cookies.get('token')?.value;
-
-  if (!token) {
+  // لو مفيش توكن أدمن → روّح على صفحة تسجيل دخول التاجر
+  if (!tokenAdmin) {
     return NextResponse.redirect(new URL('/trade/login_trade', request.url));
   }
-  
 
-  if(token_user&&!token){
-    return NextResponse.redirect(new URL('/',request.url));
-  }
+  // لو فيه توكن أدمن → اسمح له يكمل
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*'], 
+  matcher: ['/admin/:path*'],
 };
