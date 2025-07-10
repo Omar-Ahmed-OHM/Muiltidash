@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, Heart, User2 } from 'lucide-react';
-import Logo from '../../../../public/asset/images/حورلوجو-1.png';
+import Logo from '../../../../public/asset/images/ويمي تك.jpg'
 import { motion, AnimatePresence } from 'framer-motion';
 import Cookies from 'js-cookie'; 
 import { useRouter } from 'next/navigation';
@@ -35,7 +35,7 @@ const handleLogout = () => {
         dir="rtl"
         className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
           visible ? 'translate-y-0' : '-translate-y-full'
-        } bg-gradient-to-tr from-[#6B2B7A] via-[#844C9A] to-[#6B2B7A] shadow-lg backdrop-blur-md`}
+        }  bg-gradient-to-l from-[#e7c8f9] to-[#a066e7] shadow-lg backdrop-blur-md border-b border-purple-100`}
       >
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           {/* الشعار */}

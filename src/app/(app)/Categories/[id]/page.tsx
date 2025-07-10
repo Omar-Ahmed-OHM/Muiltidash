@@ -100,7 +100,7 @@ export default function ProductDetailsPage() {
   >
     {details.images.map((img: string, i: number) => (
       <SwiperSlide key={i}>
-        <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl">
+        <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl mt-16">
           <Image
             src={img}
             alt={`Product image ${i + 1}`}
@@ -126,7 +126,7 @@ export default function ProductDetailsPage() {
     </div>
   </Swiper>
 ) : details.images && details.images.length === 1 ? (
-  <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl shadow-md">
+  <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl shadow-md mt-16">
     <Image
       src={details.images[0]}
       alt="Product"

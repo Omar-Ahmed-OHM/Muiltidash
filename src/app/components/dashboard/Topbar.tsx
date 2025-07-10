@@ -2,7 +2,7 @@
 import { Bell, User2, LogOut } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import logo from '../../../../public/asset/images/حورلوجو-1.png'
+import logo from '../../../../public/asset/images/ويمي تك.jpg'
 import Link from 'next/link'
 import Cookies from 'js-cookie';
 import { useState, useRef, useEffect } from 'react'

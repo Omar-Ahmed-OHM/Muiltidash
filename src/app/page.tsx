@@ -235,7 +235,7 @@ else{
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8 pb-8">
     {products.map((product, index) => (
       <div key={index} className="transition-all duration-300 hover:scale-[1.02] hover:shadow-md">
-        <Card {...product} handellove={() => { handelfavorit(String(product._id)); setadd(!add); }} />
+        <Card {...product} handellove={() => { handelfavorit(String(product._id)); setadd(true); }} />
       </div>
     ))}
   </div>

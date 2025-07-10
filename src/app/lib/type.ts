@@ -229,6 +229,7 @@ export interface Trader {
   phoneNumber: string;
     lastName?: string;
     createdAt?:string
+    orders:Ordershoping[];
 }
 
 export interface Product {
@@ -324,6 +325,8 @@ export interface Ordershoping {
   totalPrice: number;
   orderDate: string;
   __v: number;
+  status?:string;
+  paymentState?:string;
 }
 
 export interface CartAndOrdersResponseshoping {
@@ -355,6 +358,15 @@ export interface OrderItem {
   totalPrice: number;
   status: 'Pending' | 'Confirmed' | 'Shipped' | 'Delivered' | 'Cancelled'; // أو أي حالات أخرى عندك
   paymentState: 'Pending' | 'Paid' | 'Failed'; // حسب حالتك
-  orderDate: string; // ISO date string
+  orderDate: string;
   __v: number;
+}
+
+
+export interface Serach{
+  products:main_screen_Product[];
+  pagination:Pagination;
+}
+export interface wordsearch{
+  text:string;
 }
