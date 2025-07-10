@@ -47,16 +47,16 @@ export default function ViewTable() {
   };
 
   return (
- <Container>
-  <div className="lg:pr-72 pr-4 pl-4 mt-6">
-    <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-      قائمة المنتجات
+<Container>
+  <div className="lg:pr-72 pr-4 pl-4 mt-10">
+    <h1 className="text-3xl font-extrabold text-purple-800 mb-6 text-center">
+      🛒 قائمة المنتجات
     </h1>
 
-    {/* ✅ جدول للشاشات الكبيرة فقط */}
-    <div className="hidden lg:block overflow-x-auto rounded-xl shadow-xl border border-gray-200 bg-white">
+    {/* ✅ جدول للشاشات الكبيرة */}
+    <div className="hidden lg:block overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
       <table className="min-w-full text-sm text-center">
-        <thead className="bg-gradient-to-r from-purple-200 to-pink-200 text-gray-700 text-sm uppercase tracking-wider">
+        <thead className="bg-purple-100 text-purple-700 font-semibold text-sm uppercase">
           <tr>
             <th className="px-4 py-3">الصورة</th>
             <th className="px-4 py-3">الاسم</th>
@@ -68,12 +68,12 @@ export default function ViewTable() {
             <th className="px-4 py-3">التحكم</th>
           </tr>
         </thead>
-        <tbody className="text-gray-800">
+        <tbody className="text-gray-700">
           {products.length > 0 ? (
             products.map((product) => (
               <tr
                 key={product._id}
-                className="border-t hover:bg-gray-50 transition duration-150"
+                className="border-t hover:bg-purple-50 transition duration-150"
               >
                 <td className="px-4 py-3">
                   {product.images?.[0] ? (
@@ -82,14 +82,14 @@ export default function ViewTable() {
                       alt="product"
                       width={60}
                       height={60}
-                      className="rounded-lg border object-cover mx-auto"
+                      className="rounded-full border object-cover mx-auto"
                       unoptimized
                     />
                   ) : (
                     <span className="text-gray-400">لا يوجد</span>
                   )}
                 </td>
-                <td className="px-4 py-3">{product.title}</td>
+                <td className="px-4 py-3 font-medium">{product.title}</td>
                 <td className="px-4 py-3">{product.category}</td>
                 <td className="px-4 py-3">
                   <Link
@@ -107,13 +107,13 @@ export default function ViewTable() {
                 <td className="px-4 py-3">
                   <div className="flex gap-2 justify-center">
                     <Link href={`/admin/update/${product._id}`}>
-                      <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md">
+                      <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm shadow">
                         تعديل
                       </button>
                     </Link>
                     <button
                       onClick={() => handleDelete(String(product._id))}
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md"
+                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm shadow"
                     >
                       حذف
                     </button>
@@ -132,53 +132,58 @@ export default function ViewTable() {
       </table>
     </div>
 
-    {/* ✅ بطاقات للموبايل فقط */}
-    <div className="lg:hidden space-y-4 mt-4">
+    {/* ✅ بطاقات موبايل */}
+    <div className="lg:hidden space-y-4 mt-6">
       {products.length > 0 ? (
         products.map((product) => (
           <div
             key={product._id}
-            className="bg-white shadow-md rounded-lg p-4 border border-gray-200"
+            className="bg-white shadow-md rounded-xl p-4 border border-gray-100"
           >
-            <div className="flex items-center gap-4 mb-2">
+            <div className="flex items-center gap-4 mb-3">
               {product.images?.[0] ? (
                 <Image
                   src={product.images[0]}
                   alt="product"
                   width={60}
                   height={60}
-                  className="rounded-md border object-cover"
+                  className="rounded-full border object-cover"
                   unoptimized
                 />
               ) : (
                 <span className="text-gray-400">لا يوجد صورة</span>
               )}
               <div>
-                <h2 className="text-lg font-bold">{product.title}</h2>
+                <h2 className="text-base font-bold text-purple-700">{product.title}</h2>
                 <p className="text-sm text-gray-500">{product.category}</p>
               </div>
             </div>
-            <p><span className="font-semibold">السعر:</span> {product.price} ج.م</p>
-            <p><span className="font-semibold">الكمية:</span> {product.stockQuantity}</p>
-            <p><span className="font-semibold">تاريخ الإضافة:</span> {new Date(product.createdAt).toLocaleDateString("ar-EG")}</p>
-            <p>
-              <span className="font-semibold">التاجر: </span>
-              <Link
-                href={`/admin/view_traders/${product.traderId}`}
-                className="text-purple-600 hover:underline"
-              >
-                التاجر
-              </Link>
-            </p>
-            <div className="flex gap-2 justify-end mt-3">
+            <div className="space-y-1 text-sm text-gray-700">
+              <p><span className="font-semibold">السعر:</span> {product.price} ج.م</p>
+              <p><span className="font-semibold">الكمية:</span> {product.stockQuantity}</p>
+              <p>
+                <span className="font-semibold">تاريخ الإضافة:</span>{" "}
+                {new Date(product.createdAt).toLocaleDateString("ar-EG")}
+              </p>
+              <p>
+                <span className="font-semibold">التاجر: </span>
+                <Link
+                  href={`/admin/view_traders/${product.traderId}`}
+                  className="text-purple-600 hover:underline"
+                >
+                  التاجر
+                </Link>
+              </p>
+            </div>
+            <div className="flex gap-2 justify-end mt-4">
               <Link href={`/admin/update/${product._id}`}>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md">
+                <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm">
                   تعديل
                 </button>
               </Link>
               <button
                 onClick={() => handleDelete(String(product._id))}
-                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md"
+                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm"
               >
                 حذف
               </button>
