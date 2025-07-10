@@ -50,7 +50,8 @@ const { token } = res.data.data;
 
       toast.success('تم تسجيل الدخول بنجاح 🎉');
      setTimeout(() => {
-  router.push("/admin");
+      window.location.href = "/admin";
+
 }, 500);
     } 
     else if (res.status === 401) {
