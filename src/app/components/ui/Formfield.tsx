@@ -73,7 +73,7 @@ export default function FormField({ fields, data, onChange }: Props) {
             ) : field.type === "password" ? (
             <div className="relative">
 
-  <InputField
+  <input
     name={field.name}
     type={showPassword[field.name] ? "text" : "password"}
     value={formData[field.name] || ""}

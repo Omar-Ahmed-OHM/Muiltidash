@@ -18,30 +18,7 @@ export const Card: React.FC<CardProps> = ({
     setLove(!loveit); handellove()
   }
 
-  const renderStars = (rating?: number) => {
-    const totalStars = 5
-    const fullStars = rating ? Math.floor(rating) : 0
-    const hasHalfStar = rating ? rating % 1 >= 0.5 : false
-
-    return (
-      <div className="flex items-center justify-end gap-1">
-        {[...Array(totalStars)].map((_, i) => (
-          <Star key={i} size={16}
-            className={
-              i < fullStars
-                ? 'fill-yellow-400 text-yellow-400'
-                : hasHalfStar && i === fullStars
-                ? 'fill-yellow-300 text-yellow-300'
-                : 'text-gray-300'
-            }
-          />
-        ))}
-        <span className="text-xs text-gray-500 font-medium">
-          {typeof rating === 'number' ? `(${rating.toFixed(1)})` : '(بدون تقييم)'}
-        </span>
-      </div>
-    )
-  }
+  
 
   return (
     <Container>
@@ -84,7 +61,6 @@ export const Card: React.FC<CardProps> = ({
 
           <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
 
-          {renderStars(reviews_avg)}
 
           <div className="flex items-center justify-between mt-1">
             <div>

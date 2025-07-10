@@ -40,9 +40,9 @@ export default function Traders() {
 
   return (
     <Container>
-      <div className="min-h-screen py-12 px-4 bg-gradient-to-br from-purple-100 to-pink-100 flex justify-center">
+      <div className="min-h-screen py-12 px-4 flex justify-center  ">
         {trader ? (
-          <div className="w-full max-w-6xl bg-white shadow-2xl rounded-3xl p-8 md:p-10 space-y-10 border border-purple-200 transition-all duration-300 animate-fadeIn">
+          <div className="max-w-4xl   bg-white shadow-2xl rounded-3xl p-8 md:p-10 space-y-10 border border-purple-200 transition-all duration-300 animate-fadeIn">
             {/* Header */}
             <div className="text-center">
               <UserCircle className="w-24 h-24 text-purple-600 mx-auto mb-4" />

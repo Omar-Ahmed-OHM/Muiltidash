@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
-import logo from '../../../../public/asset/images/حورلوجو-1.png';
+import logo from '../../../../public/asset/images/ويمي تك.jpg';
 
 export default function LogoImageAnimation() {
   const logoRef = useRef(null);
@@ -54,13 +54,14 @@ export default function LogoImageAnimation() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#F5EFFF]"
+      className="fixed inset-0 z-50 flex items-center justify-center  bg-gradient-to-l from-[#e7c8f9] to-[#a066e7] shadow-lg backdrop-blur-md border-b border-purple-100"
     >
       <Image
         ref={logoRef}
         src={logo}
         alt="Hoor Book Logo"
-        className="w-64 h-auto"
+        className="w-64 h-auto rounded-full
+"
          unoptimized
       />
     </div>
