@@ -13,7 +13,10 @@ export default function Topbar() {
   const router=useRouter();
   const logout = () => {
     Cookies.remove('token_admin');
-    router.push('/');
+        setTimeout(() => {
+      window.location.href = "/";
+
+}, 500);
     setOpenMenu(false);
   }
 
