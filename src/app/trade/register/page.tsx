@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import SmartNavbar from "@/app/components/ui/Navbar";
-import Logo from '../../../../public/asset/images/حورلوجو-1.png'
+import Logo from '../../../../public/asset/images/ويمي تك.jpg'
 import { Postresponse } from "@/app/lib/methodes";
 import { BaseUrl } from "@/app/components/Baseurl";
 import toast from 'react-hot-toast';

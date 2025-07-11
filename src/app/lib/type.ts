@@ -346,6 +346,7 @@ export interface ProductWithType {
   createdAt: string;
   __v: number;
   type: 'cart' | 'order';
+  cartLength?:number;
 }
 
 
@@ -369,4 +370,53 @@ export interface Serach{
 }
 export interface wordsearch{
   text:string;
+}
+
+
+
+
+
+export interface WeeklySalesReport {
+  success: boolean;
+  message: string;
+  data: {
+    totalSales: number;
+    totalOrders: number;
+    orders: Orderreport[];
+  };
+}
+
+export interface Orderreport {
+  _id: string;
+  userId: Userreport;
+  productId: Productreport | null;
+  traderId: string;
+  quantity: number;
+  totalPrice: number;
+  status: "Pending" | "Completed" | "Cancelled";
+  paymentState: "Pending" | "Paid" | "Failed";   
+  orderDate: string;
+  __v: number;
+}
+
+export interface Userreport {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  __v: number;
+}
+
+export interface Productreport {
+  _id: string;
+  title: string;
+  traderId: string;
+  description: string;
+  price: number;
+  category: string;
+  stockQuantity: number;
+  images: string[];
+  createdAt: string;
+  __v: number;
 }

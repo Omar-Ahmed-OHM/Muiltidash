@@ -30,7 +30,7 @@ export default function HomePage() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [add,setadd]=useState<boolean>(false);
+  const [add,setadd]=useState<boolean>(true);
   const [register,setregister]=useState<boolean>(false)
 
 
@@ -137,22 +137,7 @@ if(add){
     }
   }
 }
-else{
-  const handeldelete=async(id:string)=>{
-    try{
-      const res:ApiResponse<AddFavorit>=await axios.delete(`${BaseUrl}user/favorites`, {
-        data: { productId: id },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      
-    }
-    catch(error){
-      console.error("Error fetching products:", error);
-    }
-  }
-}
+
 
 
   const handelfavorit = async (id: string) => {
@@ -164,25 +149,16 @@ else{
       else{
         setregister(false);
       }
-      if (!add) {
+      if (add) {
         // Add to favorites
         const res: ApiResponse<AddFavorit> = await axios.post(urlfav, { productId: id }, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
+        toast.success('تم تنفيذ العمليه بنجاح ')
         console.log(res.data);
-      } else {
-        // Remove from favorites
-        const res: ApiResponse<AddFavorit> = await axios.delete(`${BaseUrl}user/favorites`, {
-          data: { productId: id },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log(res.data);
-      }
-      setadd(!add);
+      } 
     } catch (error) {
       console.error("Error updating favorites:", error);
     }

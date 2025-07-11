@@ -7,7 +7,7 @@ import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SmartNavbar from "../components/ui/Navbar";
-import Logo from "../../../public/asset/images/حورلوجو.jpeg";
+import Logo from "../../../public/asset/images/ويمي تك.jpg";
 import { Postresponse } from "../lib/methodes";
 import { BaseUrl } from "../components/Baseurl";
 import toast from "react-hot-toast";

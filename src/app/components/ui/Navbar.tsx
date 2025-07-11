@@ -7,13 +7,19 @@ import Logo from '../../../../public/asset/images/ويمي تك.jpg'
 import { motion, AnimatePresence } from 'framer-motion';
 import Cookies from 'js-cookie'; 
 import { useRouter } from 'next/navigation';
+import { CartAndOrdersResponseshoping, ProductWithType } from '@/app/lib/type';
+import axios from 'axios';
+import { BaseUrl } from '../Baseurl';
 const SmartNavbar = () => {
   const router=useRouter();
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showModal, setShowModal] = useState(false); 
-    const token = Cookies.get("token");
-    const token_admin = Cookies.get("token_admin");
+  const token = Cookies.get("token");
+  const token_admin = Cookies.get("token_admin");
+  const [allProducts, setAllProducts] = useState(0);
+  const url = `${BaseUrl}users/shopping`;
+  
   const controlNavbar = () => {
     const currentScrollY = window.scrollY;
     setVisible(currentScrollY < lastScrollY || currentScrollY < 80);
@@ -29,6 +35,23 @@ const handleLogout = () => {
     return () => window.removeEventListener('scroll', controlNavbar);
   }, [lastScrollY]);
 
+
+  useEffect(()=>{
+    const fetchProducts = async () => {
+      try{
+        const res = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setAllProducts(res.data.data.cartLength)
+        
+      }
+      catch(error){
+        console.log(error);
+        
+      }
+    }
+    fetchProducts()
+  },[])
   return (
     <>
       <header
@@ -87,9 +110,16 @@ const handleLogout = () => {
               href="/view_carts"
               className="flex flex-col items-center hover:text-yellow-400 transition transform hover:scale-110"
             >
-              <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition">
-                <ShoppingCart size={20} />
-              </div>
+      <div className="relative">
+  <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition">
+    <ShoppingCart size={20} />
+  </div>
+  <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">
+    {allProducts}
+  </span>
+</div>
+
+
             </Link>
           </div>
         </div>

@@ -22,6 +22,8 @@ interface ProductWithType {
   createdAt: string;
   __v: number;
   type: 'cart' | 'order';
+  totalPrice?: number;
+  quantity?: number;
 }
 
 interface Product {
@@ -57,6 +59,7 @@ export default function Favorite() {
   const [register, setRegister] = useState<boolean>(false);
   const url = `${BaseUrl}users/shopping`;
   const deleteorder = `${BaseUrl}users/cancelled-order/`;
+  const urlcreate = `${BaseUrl}orders`;
   const token = Cookies.get("token");
 
   useEffect(() => {
@@ -76,10 +79,16 @@ export default function Favorite() {
           type: 'cart',
         }));
 
-        const ordersWithType: ProductWithType[] = res.data.data.orders.map((order) => ({
-          ...order.productId,
-          type: 'order',
-        }));
+        const ordersWithType: ProductWithType[] = res.data.data.orders
+          .filter(order => order.productId) // تأكد من وجود productId
+          .map((order) => ({
+            ...order.productId,
+            type: 'order',
+            quantity: order.quantity,
+            totalPrice: order.totalPrice,
+          }));
+          
+          
 
         setAllProducts([...cartWithType, ...ordersWithType]);
       } catch (error) {
@@ -90,35 +99,37 @@ export default function Favorite() {
     getCart();
   }, []);
 
-  const handelshoping = async (productId: string) => {
-    try {
-      if (!token) {
-        setRegister(true);
-        return;
-      }
-
-      const res = await axios.post(
-        url,
-        { productId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      toast.success("تم شراء المنتج بنجاح ✅");
-
-      setAllProducts((prev) => {
-        const productToMove = prev.find(p => p._id === productId && p.type === 'order');
-        if (!productToMove) return prev;
-
-        return [
-          ...prev.filter(p => !(p._id === productId && p.type === 'order')),
-          { ...productToMove, type: 'cart' },
-        ];
-      });
-
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "حدث خطأ أثناء الشراء ❌");
+ const handelshoping = async (productId: string, quantity: number, unitPrice: number) => {
+  try {
+    if (!token) {
+      setRegister(true);
+      return;
     }
-  };
+
+    const totalPrice = unitPrice * quantity;
+
+    await axios.post(
+      urlcreate,
+      { productId, quantity, totalPrice },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    toast.success("تم شراء المنتج بنجاح ✅");
+
+    setAllProducts((prev) => {
+      const productToMove = prev.find(p => p._id === productId && p.type === 'order');
+      if (!productToMove) return prev;
+
+      return [
+        ...prev.filter(p => !(p._id === productId && p.type === 'order')),
+        { ...productToMove, type: 'cart' },
+      ];
+    });
+
+  } catch (error: any) {
+    toast.error(error.response?.data?.message || "حدث خطأ أثناء الشراء ❌");
+  }
+};
 
   const handleRemoveFromCart = async (productId: string) => {
     try {
@@ -208,10 +219,10 @@ export default function Favorite() {
             {product.type === 'order' && (
               <>
                 <button
-                  onClick={() => handelshoping(product._id)}
+                  onClick={() => handelshoping(product._id, Number(product.quantity), Number(product.totalPrice))}
                   className="flex items-center gap-1 bg-purple-600 text-white px-3 py-1.5 rounded-full hover:bg-purple-700 text-xs sm:text-sm transition"
                 >
-                  <ShoppingCart size={16} /> إعادة الشراء
+                  <ShoppingCart size={16} />  شراء
                 </button>
 
                 <button
@@ -237,8 +248,7 @@ export default function Favorite() {
         <section className="mb-16">
           <div className="bg-white rounded-xl shadow p-6 border border-purple-200">
             <h3 className="text-2xl font-semibold text-[#6B2B7A] border-b border-purple-100 pb-2 mb-6">
-              🛒 سلة المشتريات
-            </h3>
+              ✅ الطلبات       </h3>
 
             {allProducts.filter(p => p.type === 'cart').length === 0 ? (
               <p className="text-gray-500">لا توجد منتجات في السلة.</p>
@@ -250,16 +260,15 @@ export default function Favorite() {
           </div>
         </section>
 
-        <div className="w-full my-10 border-t border-dashed border-purple-300" />
-
-        <section className="mb-16">
+        <section>
           <div className="bg-white rounded-xl shadow p-6 border border-purple-200">
             <h3 className="text-2xl font-semibold text-[#6B2B7A] border-b border-purple-100 pb-2 mb-6">
-              📜 قائمة المحفوظات
+              🛒 سلة المشتريات
+
             </h3>
 
             {allProducts.filter(p => p.type === 'order').length === 0 ? (
-              <p className="text-gray-500">لا توجد طلبات محفوظة.</p>
+              <p className="text-gray-500">لا توجد طلبات سابقة.</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {allProducts.filter(p => p.type === 'order').map(renderProductCard)}
@@ -268,7 +277,7 @@ export default function Favorite() {
           </div>
         </section>
 
-        <LoginRequiredModal show={register} />
+        <LoginRequiredModal show={register}  />
       </Container>
     </div>
   );
