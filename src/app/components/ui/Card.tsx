@@ -37,7 +37,7 @@ export const Card: React.FC<CardProps> = ({
         <div className="absolute inset-0 bg-[#6B2B7A]/80 flex flex-col items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <Image src={Logo} alt="Logo" width={220} height={220} className="w-[120px] h-[120px] object-contain rounded-full mb-4" unoptimized />
           <div dir="rtl">
-            <Link href={`/Categories/${_id}`}>
+            <Link href={`/packet/${_id}`}>
               <button className="font-bold text-lg px-6 py-2 rounded-xl bg-[#ffc94d] transition w-full">عرض التفاصيل</button>
             </Link>
           </div>
