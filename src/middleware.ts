@@ -1,17 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
   const tokenAdmin = request.cookies.get('token_admin')?.value;
+  const tokenuser = request.cookies.get('token')?.value;
 
-  // لو مفيش توكن أدمن → روّح على صفحة تسجيل دخول التاجر
-  if (!tokenAdmin) {
+  // ✅ لو معهوش توكن أدمن وبيحاول يدخل صفحة أدمن → رجعه على تسجيل التاجر
+  if (!tokenAdmin && pathname.startsWith('/admin')) {
     return NextResponse.redirect(new URL('/trade/login_trade', request.url));
   }
 
-  // لو فيه توكن أدمن → اسمح له يكمل
+  if (tokenAdmin && pathname === '/trade/register') {
+    return NextResponse.redirect(new URL('/admin', request.url));
+  }
+
+  if (tokenuser && pathname === '/register' || tokenuser && pathname === '/login') {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  if ( tokenAdmin && pathname === '/trade/login_trade') {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: [
+    '/admin/:path*',
+    '/trade/register',
+    '/register',
+    '/login',
+    '/trade/login_trade'
+  ],
 };
