@@ -88,6 +88,7 @@ const handleLogout = () => {
             <button
               onClick={() => setShowModal(true)}
               className="flex flex-col items-center hover:text-yellow-400 transition transform hover:scale-110"
+              name='btn'
             >
               <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition">
                 <User2 size={20} />
