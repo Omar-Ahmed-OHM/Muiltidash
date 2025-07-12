@@ -27,6 +27,7 @@ const SmartNavbar = () => {
   };
 const handleLogout = () => {
     Cookies.remove("token");
+    Cookies.remove("token_admin");
     setShowModal(false);
     router.push('/')
   };

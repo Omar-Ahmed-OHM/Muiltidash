@@ -54,8 +54,8 @@ export default function Admin() {
     };
     getOrders();
   }, []);
+const currentOrders = filterState ? filteredOrders : orders;
 
-  const currentOrders = filteredOrders.length > 0 ? filteredOrders : orders;
 
   const statusCounts = currentOrders.reduce<Record<string, number>>((acc, order) => {
     acc[order.status] = (acc[order.status] || 0) + 1;
@@ -184,6 +184,12 @@ export default function Admin() {
                 فلتر حسب الحالة
               </button>
             </div>
+{!loading && currentOrders.length === 0 && (filteredOrders.length > 0 || filterState) && (
+  <div className="text-center text-gray-600 font-medium py-10">
+    لا توجد نتائج لهذا الفلتر
+  </div>
+)}
+
 
             <div className="sm:hidden mt-8">
               {currentOrders.map((order) => (
