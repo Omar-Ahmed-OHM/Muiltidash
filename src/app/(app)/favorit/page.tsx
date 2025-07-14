@@ -85,28 +85,30 @@ export default function Favorite() {
                   ❤️
                 </button>
 
-                <div className="relative w-full h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                  <img
-                    src={product.images[0]}
-                    alt={product.title}
-                    className="object-contain max-h-full max-w-full transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <div className="p-5 flex flex-col justify-between h-[250px]">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">{product.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">{product.description}</p>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-indigo-600 dark:text-indigo-400 mb-2">
-                      السعر: <span className="text-indigo-800 dark:text-indigo-300">{product.price} د.ع</span>
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">التصنيف: {product.category}</p>
-                    <p className={`text-sm font-medium ${product.stockQuantity > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-                      {product.stockQuantity > 0 ? `متوفر: ${product.stockQuantity}` : 'غير متوفر'}
-                    </p>
-                  </div>
-                </div>
+                <div className="relative w-full h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden mb-2">
+  <img
+    src={product.images[0]}
+    alt={product.title}
+    className="object-contain max-h-full max-w-full transition-transform duration-500 hover:scale-110"
+  />
+</div>
+
+  <div className="p-5 flex flex-col justify-between mt-4">
+  <div>
+    <h3 className="text-xl font-semibold mb-1 text-gray-800 dark:text-gray-200">{product.title}</h3>
+    <p className="text-gray-600 dark:text-gray-400 mb-2 line-clamp-3">{product.description}</p>
+  </div>
+  <div className="mt-4">
+    <p className="text-lg font-bold text-indigo-600 dark:text-indigo-400 mb-1">
+      السعر: <span className="text-indigo-800 dark:text-indigo-300">{product.price}ر.س</span>
+    </p>
+    <p className="text-sm text-gray-500 dark:text-gray-400 mb-0.5">التصنيف: {product.category}</p>
+    <p className={`text-sm font-medium ${product.stockQuantity > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+      {product.stockQuantity > 0 ? `متوفر: ${product.stockQuantity}` : 'غير متوفر'}
+    </p>
+  </div>
+</div>
+
               </div>
             ))}
           </div>

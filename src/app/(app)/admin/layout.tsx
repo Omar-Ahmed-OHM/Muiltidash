@@ -10,7 +10,7 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = {
-  title: "Hoor-Book ",
+  title: "ويمى تك ",
   description: "أفضل تجربة عربية بخط جميل",
  
 };

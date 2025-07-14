@@ -59,11 +59,11 @@ export default function LogoImageAnimation() {
       <Image
         ref={logoRef}
         src={logo}
-        alt="Hoor Book Logo"
+        alt="ويمى تك"
         width={256}
         height={256}
         className="rounded-full"
-        priority
+        unoptimized
       />
     </div>
   );
