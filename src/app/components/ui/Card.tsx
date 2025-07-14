@@ -1,7 +1,7 @@
 import { type CardProps } from '@/app/lib/type'
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { Heart, Star } from 'lucide-react'
+import { Heart } from 'lucide-react'
 import Container from '../Container'
 import Logo from '../../../../public/asset/images/حورلوجو-1.png'
 import Link from 'next/link'
@@ -14,15 +14,15 @@ export const Card: React.FC<CardProps> = ({
   packet_price_after_offer, reviews_avg
 }) => {
   const [loveit, setLove] = useState<boolean>(love)
-  const handleLoveToggle = () => {
-    setLove(!loveit); handellove()
-  }
 
-  
+  const handleLoveToggle = () => {
+    setLove(!loveit)
+    handellove()
+  }
 
   return (
     <Container>
-      <div className="w-[300px] h-[520px] flex flex-col justify-between rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-[#e8f3f0] to-[#f8f8f8] hover:shadow-xl transition relative mx-auto group">
+      <div className="w-[300px] h-[380px] flex flex-col justify-between rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-[#e8f3f0] to-[#f8f8f8] hover:shadow-xl transition relative mx-auto group">
         
         {/* زر القلب */}
         <div className="absolute top-2 left-2 bg-pink-100 p-1 rounded-full cursor-pointer z-40" onClick={handleLoveToggle}>
@@ -35,7 +35,7 @@ export const Card: React.FC<CardProps> = ({
 
         {/* الأوفرلي */}
         <div className="absolute inset-0 bg-[#6B2B7A]/80 flex flex-col items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <Image src={Logo} alt="Logo" width={220} height={220} className="w-[120px] h-[120px] object-contain rounded-full mb-4" unoptimized />
+          <Image src={Logo} alt="Logo" width={120} height={120} className="object-contain rounded-full mb-4" unoptimized />
           <div dir="rtl">
             <Link href={`/packet/${_id}`}>
               <button className="font-bold text-lg px-6 py-2 rounded-xl bg-[#ffc94d] transition w-full">عرض التفاصيل</button>
@@ -44,39 +44,38 @@ export const Card: React.FC<CardProps> = ({
         </div>
 
         {/* الصورة */}
-        <div className="relative w-full h-[200px] bg-white flex items-center justify-center">
+        <div className="relative w-full h-[180px] bg-white flex items-center justify-center">
           <Image
             src={images?.[0] || '/no-image.png'}
             alt={title}
-            width={180}
-            height={180}
-            className="object-contain max-h-[180px]"
+            width={160}
+            height={160}
+            className="object-contain max-h-[160px]"
             unoptimized
           />
         </div>
 
         {/* المحتوى */}
-        <div className="p-4 flex flex-col justify-between flex-grow space-y-1 text-left" dir="rtl">
-          <h2 className="text-base font-bold text-gray-900 line-clamp-1">{title}</h2>
+        <div className="p-4 flex flex-col justify-start flex-grow space-y-1 text-right" dir="rtl">
+          <h2 className="text-sm font-bold text-gray-900 line-clamp-1">{title}</h2>
+          <p className="text-xs text-gray-600 line-clamp-2">{description}</p>
 
-          <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+          <div className="mt-1">
+            <span className="font-bold text-sm text-black">
+              {piece_price_after_offer ?? price} ج.م
+            </span>
+            {originalPrice && (
+              <span className="text-gray-400 line-through text-xs ml-2">{originalPrice} ج.م</span>
+            )}
+          </div>
 
-
-          <div className="flex items-center justify-between mt-1">
-            <div>
-              <span className="font-bold text-lg text-black">
-                {piece_price_after_offer ?? price} ج.م
-              </span>
-              {originalPrice && (
-                <span className="text-gray-400 line-through text-sm ml-2">{originalPrice} ج.م</span>
-              )}
-            </div>
-            {discount && (
+          {discount && (
+            <div className="mt-0.5">
               <span className="bg-pink-100 text-pink-700 px-2 py-0.5 rounded text-xs font-semibold">
                 خصم {discount}%
               </span>
-            )}
-          </div>
+            </div>
+          )}
 
           {packet_price && packet_pieces !== undefined && (
             <p className="text-xs text-gray-600 mt-1">
@@ -99,7 +98,7 @@ export const Card: React.FC<CardProps> = ({
           )}
 
           {soldOut && (
-            <span className="text-red-600 font-bold text-lg mt-1">نفذت الكمية</span>
+            <span className="text-red-600 font-bold text-sm mt-1">نفذت الكمية</span>
           )}
         </div>
       </div>

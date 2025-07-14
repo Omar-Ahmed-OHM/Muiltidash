@@ -67,7 +67,7 @@ export default function AddProductPage() {
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
-  const token = Cookies.get("token_admin"); // ← خليها هنا
+  const token = Cookies.get("token_admin"); 
 
   const formData = new FormData();
   formData.append("title", data.title);

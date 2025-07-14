@@ -5,7 +5,6 @@ export function middleware(request: NextRequest) {
   const tokenAdmin = request.cookies.get('token_admin')?.value;
   const tokenuser = request.cookies.get('token')?.value;
 
-  // ✅ لو معهوش توكن أدمن وبيحاول يدخل صفحة أدمن → رجعه على تسجيل التاجر
   if (!tokenAdmin && pathname.startsWith('/admin')) {
     return NextResponse.redirect(new URL('/trade/login_trade', request.url));
   }

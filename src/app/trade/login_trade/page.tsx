@@ -41,7 +41,10 @@ const handleSubmit = async (e: React.FormEvent) => {
 const { token } = res.data.data;
     if (res.status === 200||res.status===201) {
 
-      Cookies.set('token_admin', token, {expires: 1,});
+      Cookies.set('token_admin', token, {
+        expires: 1,
+        
+      });
 
       toast.success('تم تسجيل الدخول بنجاح 🎉');
      setTimeout(() => {
