@@ -80,7 +80,12 @@ export default function HomePage() {
       const res: ApiResponse<gethome> = await CallApi("get",`${BaseUrl}main/main-screen?page=${page}&limit=10`);
       const newProducts = res.data.products;
 
-      setProducts(prev => [...prev, ...newProducts]);
+      setProducts(prev => {
+  const existingIds = new Set(prev.map(p => p._id));
+  const filteredNew = newProducts.filter(p => !existingIds.has(p._id));
+  return [...prev, ...filteredNew];
+});
+
       setPage(prev => prev + 1);
 
       if (newProducts.length === 0 || page >= res.data.pagination.totalPages) {
