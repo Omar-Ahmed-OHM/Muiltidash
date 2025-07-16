@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Image from 'next/image';
 import logo from '../../../../public/asset/images/ويمي تك.jpg';
+
 export default function LogoImageAnimation() {
   const logoRef = useRef(null);
   const containerRef = useRef(null);
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    requestIdleCallback(() => {
+    const runAnimation = () => {
       const ctx = gsap.context(() => {
         const tl = gsap.timeline({
           onComplete: () => {
@@ -46,7 +47,16 @@ export default function LogoImageAnimation() {
       }, containerRef);
 
       return () => ctx.revert();
-    });
+    };
+
+    // استخدم requestIdleCallback لو موجود، وإلا fallback لـ setTimeout
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(runAnimation);
+      } else {
+        setTimeout(runAnimation, 1);
+      }
+    }
   }, []);
 
   if (!showLoader) return null;
