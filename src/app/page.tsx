@@ -48,13 +48,13 @@ export default function HomePage() {
     {
       id: 2,
       title: "عنوان 2",
-      image: '/asset/images/slide1.jpeg',
+      image: '/asset/images/slide2.jpeg',
       product_id: 102,
     },
     {
       id: 3,
       title: "عنوان 2",
-      image: '/asset/images/slide1.jpeg',
+      image: '/asset/images/slide3.jpeg',
       product_id: 102,
     },
  
