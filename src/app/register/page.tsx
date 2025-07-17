@@ -58,7 +58,7 @@ const url = `${BaseUrl}users/signup`
                 className="rounded-full shadow-md"
               unoptimized
               />
-              <h2 className="text-2xl font-bold text-purple-800 text-center flex items-center gap-1">
+              <h2 className="text-2xl font-bold bg-text-gradient bg-clip-text text-transparent text-center flex items-center gap-1">
                 <Sparkles className="w-5 h-5 text-orange-400 animate-bounce" />
                 إنشاء حساب جديد
               </h2>
@@ -79,7 +79,7 @@ const url = `${BaseUrl}users/signup`
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-700 to-orange-400 text-white font-bold py-2 rounded-lg shadow-lg hover:scale-[1.02] transition-all duration-300"
+              className="w-full bg-black  text-white font-bold py-2 rounded-lg shadow-lg hover:scale-[1.02] transition-all duration-300"
             >
               إنشاء حساب جديد
             </button>
@@ -87,7 +87,7 @@ const url = `${BaseUrl}users/signup`
             <p className="text-center text-sm text-gray-700">
               لديك حساب بالفعل؟{" "}
               <Link href="/login">
-                <span className="text-purple-700 font-semibold underline cursor-pointer hover:text-orange-500 transition">
+                <span className="bg-text-gradient bg-clip-text text-transparent font-semibold underline cursor-pointer hover:text-orange-500 transition">
                   تسجيل الدخول
                 </span>
               </Link>

@@ -26,7 +26,8 @@ export default {
         right: "10px 0 15px -3px rgba(0, 0, 0, 0.1), 4px 0 6px -2px rgba(0, 0, 0, 0.05)",
     },
       backgroundImage: {
-        'text-gradient': 'linear-gradient(to bottom, #F6F6F7, #7E808F)',
+'text-gradient': 'linear-gradient(to bottom, #0f172a, #1e293b, #334155)',
+
         'gradient-custom': 'linear-gradient(to right, #yourCardColor 30%, #yourMainColor 70%)',
      
       },

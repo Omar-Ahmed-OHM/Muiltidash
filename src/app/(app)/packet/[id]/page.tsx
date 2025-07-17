@@ -106,7 +106,7 @@ export default function ProductDetailsPage() {
             src={img}
             alt={`Product image ${i + 1}`}
             fill
-            className="object-cover rounded-xl transition-all duration-300"
+            className="object-contain  rounded-xl transition-all duration-300"
             unoptimized
             priority
           />
@@ -133,7 +133,7 @@ export default function ProductDetailsPage() {
       src={details.images[0]}
       alt="Product"
       fill
-      className="object-cover rounded-xl"
+      className="object-contain  rounded-xl"
       unoptimized
       priority
     />
@@ -149,7 +149,7 @@ export default function ProductDetailsPage() {
           {/* Product Info Section */}
           <div className="w-full space-y-6 pt-6">
             <div className="bg-white p-6 rounded-2xl shadow-lg border border-purple-100">
-              <h2 className="text-3xl font-bold text-purple-700 mb-4">📦 تفاصيل المنتج</h2>
+              <h2 className="text-3xl font-bold text-[#1e293b] mb-4">📦 تفاصيل المنتج</h2>
               <ul className="space-y-3 text-gray-800 text-base sm:text-lg">
                 <li><span className="font-semibold text-gray-600">اسم المنتج:</span> {details.title}</li>
                 <li><span className="font-semibold text-gray-600">السعر:</span> <span className="text-green-700 font-bold">{details.price} جنيه</span></li>
@@ -161,7 +161,7 @@ export default function ProductDetailsPage() {
 
             {/* Trader Info */}
             <div className="bg-gray-50 p-6 rounded-2xl shadow-sm border">
-              <h3 className="text-xl font-bold text-purple-700 mb-3">👨‍💼 بيانات التاجر</h3>
+              <h3 className="text-xl font-bold text-[#1e293b] mb-3">👨‍💼 بيانات التاجر</h3>
               <ul className="space-y-2 text-gray-700 text-base sm:text-lg">
                 <li><span className="font-semibold text-gray-600">الاسم:</span> {details.traderId.firstName}</li>
                 <li><span className="font-semibold text-gray-600">البريد:</span> {details.traderId.email}</li>
@@ -174,7 +174,7 @@ export default function ProductDetailsPage() {
               
               <button
                 onClick={()=>{handleSubmit(String(productid))}}
-                className="w-full bg-gradient-to-br from-purple-700 via-pink-500 to-orange-400 hover:opacity-95 text-white font-bold py-3 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#334155] hover:opacity-95 text-white font-bold py-3 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2"
               >
                 🛒 أضف إلى السلة الآن
               </button>

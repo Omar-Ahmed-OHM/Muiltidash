@@ -82,7 +82,7 @@ const { token } = res.data.data;
             className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md space-y-6"
           >
             <div className="flex flex-col items-center text-center space-y-2">
-              <h2 className="text-3xl font-bold text-purple-800">مرحبًا بعودتك</h2>
+              <h2 className="text-3xl font-bold bg-text-gradient bg-clip-text text-transparent">مرحبًا بعودتك</h2>
               <p className="text-sm text-gray-500">سجّل دخولك للوصول إلى حسابك كتاجر</p>
             </div>
 
@@ -90,7 +90,7 @@ const { token } = res.data.data;
 
             <button
               type="submit"
-              className="w-full mt-2 bg-gradient-to-r from-purple-700 to-orange-400 text-white font-semibold py-2 rounded-lg shadow-md hover:opacity-90 transition"
+              className="w-full mt-2 bg-black  text-white font-semibold py-2 rounded-lg shadow-md hover:opacity-90 transition"
             >
               تسجيل الدخول
             </button>

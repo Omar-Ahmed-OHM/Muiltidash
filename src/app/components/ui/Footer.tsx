@@ -15,7 +15,8 @@ import {
   FaSnapchat,
   FaTiktok,
   FaXTwitter,
-  FaLocationDot
+  FaLocationDot,
+  FaWhatsapp
 } from 'react-icons/fa6';
 import Logo from '../../../../public/asset/images/ويمي تك.jpg';
 import { Dialog } from '@headlessui/react';
@@ -75,7 +76,18 @@ const Footer: React.FC = () => {
               <h3 className="text-lg font-bold mb-4 border-b border-purple-300 pb-2">تواصل معنا</h3>
               <ul className="space-y-3 text-sm text-gray-100">
                 <li className="flex items-center gap-2"><FaLocationDot /> المقر الرئيسي: السعودية</li>
-                <li className="flex items-center gap-2"><FaPhone /> <Link href="https://wa.me/966530574009" className="hover:text-green-300 transition">0530574009</Link></li>
+                <li className="flex items-center gap-2">
+  <FaWhatsapp className="text-green-500" />
+  <Link
+    href="https://wa.me/966530574009"
+    target="_blank"
+    className="hover:text-green-400  transition"
+  >
+    💬 تواصل معنا الآن على الواتساب
+  </Link>
+</li>
+
+
                 <li className="flex items-center gap-2"><FaEnvelope /> <a href="mailto:wimi.techsa@gmail.com" className="hover:text-blue-300">wimi.techsa@gmail.com</a></li>
               </ul>
             </div>

@@ -42,13 +42,19 @@ export default function HomePage() {
     {
       id: 1,
       title: "عنوان 1",
-      image: '/asset/images/car3.jpg',
+      image: '/asset/images/slide1.JPEG',
       product_id: 101,
     },
     {
       id: 2,
       title: "عنوان 2",
-      image: '/asset/images/car2.webp',
+      image: '/asset/images/slide2.JPEG',
+      product_id: 102,
+    },
+    {
+      id: 3,
+      title: "عنوان 2",
+      image: '/asset/images/slide3.JPEG',
       product_id: 102,
     },
  
@@ -192,7 +198,7 @@ if(add){
             {productSliderItems.length > 0 && (
               <Slider
                 items={productSliderItems}
-                height="h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px]"
+                height="h-[200px] sm:h-[300px] md:h-[500px] lg:h-[400px] xl:h-[600px]"
                 objectFit="cover"
                 showNavigation={true}
                 showPagination={true}

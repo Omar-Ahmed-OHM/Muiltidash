@@ -133,7 +133,7 @@ export default function RegisterPage() {
           >
             <div className="flex flex-col items-center space-y-2">
               <Image src={Logo} alt="شعار الموقع" width={60} height={60} className="rounded-full shadow-md" unoptimized />
-              <h2 className="text-2xl font-bold text-purple-800 text-center flex items-center gap-1">
+              <h2 className="text-2xl font-bold bg-text-gradient bg-clip-text text-transparent text-center flex items-center gap-1">
                 <Sparkles className="w-5 h-5 text-orange-400 animate-bounce" />
                 إنشاء حساب جديد
               </h2>
@@ -160,7 +160,7 @@ export default function RegisterPage() {
               disabled={!agree}
               className={`w-full font-bold py-2 rounded-lg shadow-lg transition-all duration-300 ${
                 agree
-                  ? "bg-gradient-to-r from-purple-700 to-orange-400 text-white hover:scale-[1.02]"
+                  ? "bg-black  text-white hover:scale-[1.02]"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             >

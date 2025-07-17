@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { Heart } from 'lucide-react'
 import Container from '../Container'
-import Logo from '../../../../public/asset/images/wemi-tech-card.jpeg'
+import Logo from '../../../../public/asset/images/ويمي تك.jpg';
 import Link from 'next/link'
 
 export const Card: React.FC<CardProps> = ({

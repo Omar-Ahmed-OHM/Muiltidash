@@ -35,7 +35,7 @@ export const Slider:React.FC<SwiperSliderProps>=({
       >
 {Array.isArray(items) && items.length > 0 && items.map((src, i) => (
   <SwiperSlide key={i}>
-    <Link href={`/Categories/${src.id}`} className="block w-full h-full">
+    <div className="block w-full h-full">
       <div className={`relative w-full ${height}`}>
      {src.image ? (
   <Image
@@ -57,7 +57,7 @@ export const Slider:React.FC<SwiperSliderProps>=({
 )}
 
       </div>
-    </Link>
+    </div>
   </SwiperSlide>
 ))}
 
