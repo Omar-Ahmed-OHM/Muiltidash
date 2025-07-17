@@ -175,7 +175,7 @@ export default function Favorite() {
   };
 
   const renderProductCard = (product: ProductWithType, index: number) => (
-    <div key={`${product.type}-${product._id}-${index}`} className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+    <div key={`${product.type}-${product._id}-${index}`} className="bg-[#FDF9FF] rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       <div className="grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] gap-4 p-4 items-center">
         <div className="w-[80px] sm:w-[100px] h-[80px] sm:h-[100px]">
           {product.images?.[0] ? (
@@ -196,9 +196,9 @@ export default function Favorite() {
 
         <div className="flex flex-col justify-between">
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-[#4B116B]">{product.title}</h3>
+            <h3 className="text-base sm:text-lg font-bold text-[#3F0F59]">{product.title}</h3>
             <p className="text-xs sm:text-sm text-gray-500 line-clamp-2">{product.description}</p>
-            <p className="text-sm sm:text-base font-semibold text-purple-900 mt-1">{product.price} ج.م</p>
+            <p className="text-sm sm:text-base font-semibold text-[#5B21B6] mt-1">{product.price} ج.م</p>
 
             {product.type === 'order' && (
               <span className="inline-block text-[10px] sm:text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded-full mt-1">
@@ -212,13 +212,13 @@ export default function Favorite() {
               <>
                 <button
                   onClick={() => handleRemoveFromCart(product._id, product.quantity, product.totalPrice)}
-                  className="flex items-center gap-1 bg-red-100 text-red-600 px-3 py-1.5 rounded-full hover:bg-red-200 text-xs sm:text-sm transition"
+                  className="flex items-center gap-1 bg-[#FFE4E6] text-[#B91C1C]  px-3 py-1.5 rounded-full hover:bg-red-200 text-xs sm:text-sm transition"
                 >
                   <Trash size={16} /> حذف
                 </button>
                 <Link
                 href={`/Categories/${product._id}`}
-                  className="flex items-center gap-1 bg-purple-600 text-white px-3 py-1.5 rounded-full hover:bg-purple-700 text-xs sm:text-sm transition"
+                  className="flex items-center gap-1 bg-[#6B21A8] hover:bg-[#581C87] text-white px-3 py-1.5 rounded-full text-xs sm:text-sm transition"
                 >
                   <ShoppingCart size={16} /> شراء
                 </Link>
@@ -228,7 +228,7 @@ export default function Favorite() {
             {product.type === 'order' && product.orderId && (
               <button
                 onClick={() => handelcanceleorder(product.orderId!)}
-                className="flex items-center gap-1 bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full hover:bg-gray-200 text-xs sm:text-sm transition"
+                className="flex items-center gap-1 bg-[#EDE9FE] text-[#5B21B6] hover:bg-[#DDD6FE] px-3 py-1.5 rounded-full  text-xs sm:text-sm transition"
               >
                 <Trash size={16} /> إلغاء الطلب
               </button>
@@ -240,14 +240,14 @@ export default function Favorite() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f4e1ff] via-white to-[#f6f0ff] p-6 mt-12">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] via-white to-[#F5F0FF] p-6 mt-12">
       <SmartNavbar />
       <Container>
-        <h2 className="text-4xl font-bold text-center text-[#6B2B7A] my-10">🛍️ مشترياتي</h2>
+        <h2 className="text-4xl font-bold text-center text-[#4C1D95] my-10">🛍️ مشترياتي</h2>
 
         <section className="mb-16">
-          <div className="bg-white rounded-xl shadow p-6 border border-purple-200">
-            <h3 className="text-2xl font-semibold text-[#6B2B7A] border-b border-purple-100 pb-2 mb-6">
+          <div className="bg-[#FDF9FF] rounded-xl shadow p-6 border border-[#E9D5FF]">
+            <h3 className="text-2xl font-semibold text-[#4C1D95] border-[#EDE9FE] border-b  pb-2 mb-6">
               🛒 سلة المشتريات
             </h3>
 
@@ -262,7 +262,7 @@ export default function Favorite() {
         </section>
 
         <section>
-          <div className="bg-white rounded-xl shadow p-6 border border-purple-200">
+          <div className="bg-[#FDF9FF] rounded-xl shadow p-6 border border-purple-200">
             <h3 className="text-2xl font-semibold text-[#6B2B7A] border-b border-purple-100 pb-2 mb-6">
               ✅ الطلبات
             </h3>

@@ -35,7 +35,8 @@ export default function Topbar() {
       dir="rtl"
       className="
         fixed top-0 left-0 right-0 z-30 h-16
-        bg-gradient-to-l from-[#F8F1FC] to-[#ebdbff]
+         bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#334155] 
+         rounded-md
         shadow-sm
         flex items-center justify-between
         px-4 sm:px-6 lg:px-6
@@ -55,13 +56,13 @@ export default function Topbar() {
             unoptimized
           />
         </Link>
-        <h1 className="text-sm sm:text-base font-bold text-[#6B2B7A] truncate max-w-xs sm:max-w-md">
+        <h1 className="text-sm sm:text-base font-bold text-border-icon truncate max-w-xs sm:max-w-md">
           أهلاً بك في لوحة التحكم 👋
         </h1>
       </div>
 
       {/* الإشعارات واليوزر */}
-      <div className="relative flex items-center gap-3 text-[#6B2B7A]" ref={menuRef}>
+      <div className="relative flex items-center gap-3 text-border-icon" ref={menuRef}>
         <motion.button
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.9 }}

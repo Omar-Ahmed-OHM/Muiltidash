@@ -3,77 +3,80 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ShoppingCart, Heart, User2 } from 'lucide-react';
-import Logo from '../../../../public/asset/images/ويمي تك.jpg'
+import Logo from '../../../../public/asset/images/ويمي تك.jpg';
 import { motion, AnimatePresence } from 'framer-motion';
-import Cookies from 'js-cookie'; 
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-import { CartAndOrdersResponseshoping, ProductWithType } from '@/app/lib/type';
+import { CartAndOrdersResponseshoping } from '@/app/lib/type';
 import axios from 'axios';
 import { BaseUrl } from '../Baseurl';
+
 const SmartNavbar = () => {
-  const router=useRouter();
+  const router = useRouter();
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
   const token = Cookies.get("token");
   const token_admin = Cookies.get("token_admin");
   const [allProducts, setAllProducts] = useState(0);
   const url = `${BaseUrl}users/shopping`;
-  
+
   const controlNavbar = () => {
     const currentScrollY = window.scrollY;
     setVisible(currentScrollY < lastScrollY || currentScrollY < 80);
     setLastScrollY(currentScrollY);
   };
-const handleLogout = () => {
+
+  const handleLogout = () => {
     Cookies.remove("token");
     Cookies.remove("token_admin");
     setShowModal(false);
-    router.push('/')
+    router.push('/');
   };
+
   useEffect(() => {
     window.addEventListener('scroll', controlNavbar);
     return () => window.removeEventListener('scroll', controlNavbar);
   }, [lastScrollY]);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     const fetchProducts = async () => {
-      try{
+      try {
         const res = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setAllProducts(res.data.data.cartLength)
-        
-      }
-      catch(error){
+        setAllProducts(res.data.data.cartLength);
+      } catch (error) {
         console.log(error);
-        
       }
-    }
-    fetchProducts()
-  },[])
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <>
-      <header
-        dir="rtl"
-        className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
-          visible ? 'translate-y-0' : '-translate-y-full'
-        }  bg-gradient-to-l from-[#e7c8f9] to-[#a066e7] shadow-lg backdrop-blur-md border-b border-purple-100`}
-      >
+  <header
+  className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
+    visible ? 'translate-y-0' : '-translate-y-full'
+  } bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#334155] shadow-md border-b-2 border-[#f59e0b]`}
+>
+
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           {/* الشعار */}
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src={Logo}
-              alt="شعار"
-              className="w-[46px] h-[46px] rounded-full"
-              unoptimized
-            />
+          <Image
+  src={Logo}
+  alt="شعار"
+  className="w-[46px] h-[46px] rounded-full border-2 border-border-icon shadow-[0_0_12px_#10b981] transition-transform hover:scale-110"
+/>
+
           </Link>
 
           {/* شريط البحث */}
-          <Link href={'/search'} className="hidden md:flex flex-1 max-w-lg items-center bg-white/90 backdrop-blur rounded-full px-4 py-1 shadow-inner focus-within:ring-2 focus-within:ring-yellow-400 transition">
+          <Link
+            href={'/search'}
+            className="hidden md:flex flex-1 max-w-lg items-center bg-white/90 backdrop-blur rounded-full px-4 py-1 shadow-inner focus-within:ring-2 focus-within:ring-yellow-400 transition"
+          >
             <Search className="text-gray-500 ml-2" size={18} />
             <input
               type="text"
@@ -84,13 +87,12 @@ const handleLogout = () => {
 
           {/* الأيقونات */}
           <div className="flex items-center gap-4 text-white text-xs sm:text-sm">
-            {/* أيقونة التسجيل - زر يفتح المودال */}
             <button
               onClick={() => setShowModal(true)}
               className="flex flex-col items-center hover:text-yellow-400 transition transform hover:scale-110"
-              name='btn'
+              name="btn"
             >
-              <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition">
+              <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition border-[2px] border-border-icon">
                 <User2 size={20} />
               </div>
             </button>
@@ -101,7 +103,7 @@ const handleLogout = () => {
               href="/favorit"
               className="flex flex-col items-center hover:text-pink-300 transition transform hover:scale-110"
             >
-              <div className="p-2 rounded-full bg-white/10 hover:bg-pink-300/20 transition">
+              <div className="p-2 rounded-full bg-white/10 hover:bg-pink-300/20 transition border-[2px] border-border-icon">
                 <Heart size={20} />
               </div>
             </Link>
@@ -112,23 +114,24 @@ const handleLogout = () => {
               href="/view_carts"
               className="flex flex-col items-center hover:text-yellow-400 transition transform hover:scale-110"
             >
-      <div className="relative">
-  <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition">
-    <ShoppingCart size={20} />
-  </div>
-  <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow">
-    {allProducts}
-  </span>
-</div>
-
-
+              <div className="relative">
+                <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition border-[2px] border-border-icon">
+                  <ShoppingCart size={20} />
+                </div>
+                <span className="absolute -top-1 -right-1 bg-[#f0a136] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-lg">
+                  {allProducts}
+                </span>
+              </div>
             </Link>
           </div>
         </div>
 
         {/* البحث في الموبايل */}
         <div className="md:hidden px-4 pb-3">
-          <Link href={'/search'} className="flex items-center bg-white/90 rounded-full px-4 py-2 shadow-inner focus-within:ring-2 focus-within:ring-yellow-400 transition">
+          <Link
+            href={'/search'}
+            className="flex items-center bg-white/90 rounded-full px-4 py-2 shadow-inner focus-within:ring-2 focus-within:ring-yellow-400 transition"
+          >
             <Search className="text-gray-500 ml-2" size={18} />
             <input
               type="text"
@@ -140,75 +143,76 @@ const handleLogout = () => {
       </header>
 
       {/* المودال لاختيار نوع التسجيل */}
- <AnimatePresence>
-  {showModal && (
-    <motion.div
-      key="modal"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-      onClick={() => setShowModal(false)}
-    >
-      <motion.div
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: -20, opacity: 0 }}
-        onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-2xl p-6 shadow-xl w-[90%] max-w-sm text-center"
-      >
-        <h2 className="text-xl font-bold text-[#6B2B7A] mb-4">
-          {token ? 'مرحباً 👋' : 'اختر نوع التسجيل'}
-        </h2>
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl p-6 shadow-xl w-[90%] max-w-sm text-center"
+            >
+              <h2 className="text-xl font-bold text-[#f0a136] mb-4">
+                {token ? 'مرحباً 👋' : 'اختر نوع التسجيل'}
+              </h2>
 
-        {token ? (
-          <div className="flex flex-col gap-4">
-            <Link
-              href="/admin"
-              className="bg-purple-600 text-white py-2 rounded-full hover:bg-purple-700 transition"
-            >
-              لوحة تحكم الأدمن
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 text-white py-2 rounded-full hover:bg-red-600 transition"
-            >
-              تسجيل الخروج
-            </button>
-            <button
-              onClick={() => setShowModal(false)}
-              className="text-sm text-gray-500 mt-2 hover:underline"
-            >
-              إلغاء
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            <Link
-              href="/register"
-              className="bg-purple-600 text-white py-2 rounded-full hover:bg-purple-700 transition"
-            >
-              التسجيل كمستخدم
-            </Link>
-            <Link
-              href="/trade/register"
-              className="bg-yellow-500 text-white py-2 rounded-full hover:bg-yellow-600 transition"
-            >
-              التسجيل كتاجر
-            </Link>
-            <button
-              onClick={() => setShowModal(false)}
-              className="text-sm text-gray-500 mt-2 hover:underline"
-            >
-              إلغاء
-            </button>
-          </div>
+              {token ? (
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href="/admin"
+                    className="bg-[#a066e7] text-white py-2 rounded-full hover:bg-[#8b4fd1] transition"
+                  >
+                    لوحة تحكم الأدمن
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white py-2 rounded-full hover:bg-red-600 transition"
+                  >
+                    تسجيل الخروج
+                  </button>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="text-sm text-gray-500 mt-2 hover:underline"
+                  >
+                    إلغاء
+                  </button>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href="/register"
+                    className="bg-[#2ecc71] text-white py-2 rounded-full hover:bg-[#27ae60] transition"
+                  >
+                    التسجيل كمستخدم
+                  </Link>
+                  <Link
+                    href="/trade/register"
+                    className="bg-[#f0a136] text-white py-2 rounded-full hover:bg-[#e08b10] transition"
+                  >
+                    التسجيل كتاجر
+                  </Link>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="text-sm text-gray-500 mt-2 hover:underline"
+                  >
+                    إلغاء
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
         )}
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
+      </AnimatePresence>
     </>
   );
 };
+
 export default SmartNavbar;

@@ -42,21 +42,16 @@ export default function HomePage() {
     {
       id: 1,
       title: "عنوان 1",
-      image: '/asset/images/سلايدر اوكسي.png',
+      image: '/asset/images/car3.jpg',
       product_id: 101,
     },
     {
       id: 2,
       title: "عنوان 2",
-      image: '/asset/images/سلايدر اوكسي.png',
+      image: '/asset/images/car2.webp',
       product_id: 102,
     },
-    {
-      id: 3,
-      title: "عنوان 3",
-      image: '/asset/images/سلايدر اوكسي.png',
-      product_id: 103,
-    },
+ 
   ];
 
   // Show logo once
@@ -178,8 +173,9 @@ if(add){
           <svg viewBox="0 0 1440 220" className="w-full h-full" preserveAspectRatio="none">
             <defs>
               <linearGradient id="gradient" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stopColor="#F5EFFF" />
-                <stop offset="100%" stopColor="#fdfbff" />
+               <stop offset="0%" stopColor="#f3f4f6" />
+<stop offset="100%" stopColor="#e5e7eb" />
+
               </linearGradient>
             </defs>
             <path
@@ -210,7 +206,7 @@ if(add){
        {/* Best Selling Products */}
 <div className="w-full bg-white mt-6 relative shadow-sm rounded-xl">
   <div className="flex justify-center items-center text-2xl mb-4 ">
-    <h2 className="text-btn-color font-bold text-[26px] sm:text-[30px] mb-4 tracking-tight">الأكثر مبيعاً</h2>
+    <h2 className="text-[#1f2f5c] font-bold text-[26px] sm:text-[30px] mb-4 tracking-tight">الأكثر مبيعاً</h2>
   </div>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8 pb-8">

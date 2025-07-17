@@ -49,14 +49,15 @@ export default function ViewTable() {
   return (
 <Container>
   <div className="lg:pr-72 pr-4 pl-4 mt-10">
-    <h1 className="text-3xl font-extrabold text-purple-800 mb-6 text-center">
+
+    <h1 className="text-3xl font-extrabold text-[#4C1D95] mb-6 text-center">
       🛒 قائمة المنتجات
     </h1>
 
     {/* ✅ جدول للشاشات الكبيرة */}
-    <div className="hidden lg:block overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-white">
+    <div className="hidden lg:block overflow-x-auto rounded-2xl shadow-lg border border-gray-200 bg-[#FDF8FF]">
       <table className="min-w-full text-sm text-center">
-        <thead className="bg-purple-100 text-purple-700 font-semibold text-sm uppercase">
+        <thead className="bg-[#3B1B66] text-white font-semibold text-sm uppercase">
           <tr>
             <th className="px-4 py-3">الصورة</th>
             <th className="px-4 py-3">الاسم</th>
@@ -73,7 +74,7 @@ export default function ViewTable() {
             products.map((product) => (
               <tr
                 key={product._id}
-                className="border-t hover:bg-purple-50 transition duration-150"
+                className="border-t hover:bg-[#EEE1FF] transition duration-150"
               >
                 <td className="px-4 py-3">
                   {product.images?.[0] ? (
@@ -107,13 +108,13 @@ export default function ViewTable() {
                 <td className="px-4 py-3">
                   <div className="flex gap-2 justify-center">
                     <Link href={`/admin/update/${product._id}`}>
-                      <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm shadow">
+                      <button className="bg-[#6D28D9] hover:bg-[#5B21B6] text-white px-3 py-1.5 rounded-lg text-sm shadow">
                         تعديل
                       </button>
                     </Link>
                     <button
                       onClick={() => handleDelete(String(product._id))}
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm shadow"
+                      className="bg-[#D926A9] hover:bg-[#AD1B87] text-white px-3 py-1.5 rounded-lg text-sm shadow"
                     >
                       حذف
                     </button>
@@ -177,13 +178,13 @@ export default function ViewTable() {
             </div>
             <div className="flex gap-2 justify-end mt-4">
               <Link href={`/admin/update/${product._id}`}>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md text-sm">
+                <button className="bg-[#6D28D9] hover:bg-[#5B21B6] text-white px-3 py-1.5 rounded-md text-sm">
                   تعديل
                 </button>
               </Link>
               <button
                 onClick={() => handleDelete(String(product._id))}
-                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm"
+                className="bg-[#D926A9] hover:bg-[#AD1B87] text-white px-3 py-1.5 rounded-md text-sm"
               >
                 حذف
               </button>

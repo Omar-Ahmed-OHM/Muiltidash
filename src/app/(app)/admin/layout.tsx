@@ -22,8 +22,8 @@ export default function RootLayout({
 }>) {
  return (
     <div className="flex flex-row-reverse">
-      <div className="flex-1 ml-0 lg:mr-64 bg-gradient-to-br from-purple-50 to-orange-50 min-h-screen">
-        <Topbar />
+      <div className="flex-1 ml-0 lg:mr-64 bg-gradient-to-br from-[#F7F3FF] via-[#FCFAFD] to-[#FFFDFE] min-h-screen">
+    <Topbar />
         <main className="pt-20 p-6 w-full">{children}</main>
       </div>
       <Sidebar />

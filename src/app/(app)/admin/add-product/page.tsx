@@ -108,7 +108,7 @@ catch(error){
           mx-auto
         ">
           <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#6B2B7A] mb-2 truncate">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-2 truncate">
               🚀 إضافة منتج جديد
             </h2>
             <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
@@ -142,7 +142,7 @@ catch(error){
 
             <Button
               type="submit"
-              classname="w-full bg-gradient-to-r from-[#6B2B7A] to-[#a14bc0] hover:from-[#5c226a] hover:to-[#9444b2] text-white font-bold py-3 text-lg rounded-xl transition duration-300 shadow-md hover:shadow-lg"
+              classname="w-full bg-gradient-to-r from-black/50 to-black/65 hover:from-[#170a1a] hover:to-[#0e090f] text-white font-bold py-3 text-lg rounded-xl transition duration-300 shadow-md hover:shadow-lg"
             >
               🎉 إضافة المنتج
             </Button>

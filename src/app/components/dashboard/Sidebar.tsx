@@ -30,7 +30,7 @@ export default function Sidebar() {
   <aside
   dir="rtl"
   className={`
-    fixed top-0 right-0 h-screen w-64 bg-gradient-to-b from-[#372740] to-[#5d136d] text-white shadow-xl rounded-l-lg z-40 flex flex-col transition-transform duration-300 ease-in-out
+    fixed top-0 right-0 h-screen w-64  bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#334155]  text-white shadow-xl rounded-l-lg z-40 flex flex-col transition-transform duration-300 ease-in-out
     ${isOpen ? 'translate-x-0' : 'translate-x-full'}
     lg:translate-x-0
     overflow-y-auto

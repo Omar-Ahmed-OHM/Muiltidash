@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { Heart } from 'lucide-react'
 import Container from '../Container'
-import Logo from '../../../../public/asset/images/حورلوجو-1.png'
+import Logo from '../../../../public/asset/images/wemi-tech-card.jpeg'
 import Link from 'next/link'
 
 export const Card: React.FC<CardProps> = ({
@@ -25,7 +25,7 @@ export const Card: React.FC<CardProps> = ({
       <div className="w-[300px] h-[380px] flex flex-col justify-between rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-[#e8f3f0] to-[#f8f8f8] hover:shadow-xl transition relative mx-auto group">
         
         {/* زر القلب */}
-        <div className="absolute top-2 left-2 bg-pink-100 p-1 rounded-full cursor-pointer z-40" onClick={handleLoveToggle}>
+        <div className="absolute top-2 left-2 bg-gray-100 p-1 rounded-full cursor-pointer z-40" onClick={handleLoveToggle}>
           {loveit ? (
             <Heart size={18} className="text-pink-500" fill="#ec4899" stroke="#ec4899" />
           ) : (
@@ -34,11 +34,13 @@ export const Card: React.FC<CardProps> = ({
         </div>
 
         {/* الأوفرلي */}
-        <div className="absolute inset-0 bg-[#6B2B7A]/80 flex flex-col items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#5f4d8b]/90 to-[#1e1b4b]/90 flex flex-col items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           <Image src={Logo} alt="Logo" width={120} height={120} className="object-contain rounded-full mb-4" unoptimized />
           <div dir="rtl">
             <Link href={`/packet/${_id}`}>
-              <button className="font-bold text-lg px-6 py-2 rounded-xl bg-[#ffc94d] transition w-full">عرض التفاصيل</button>
+              
+              <button className="font-bold text-lg px-6 py-2 rounded-xl bg-gradient-to-r from-black/50 to-black/65  transition w-full">عرض التفاصيل</button>
+            
             </Link>
           </div>
         </div>
