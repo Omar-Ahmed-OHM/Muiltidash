@@ -42,19 +42,19 @@ export default function HomePage() {
     {
       id: 1,
       title: "عنوان 1",
-      image: '/asset/images/slide1.JPEG',
+      image: '/asset/images/slide1.jpeg',
       product_id: 101,
     },
     {
       id: 2,
       title: "عنوان 2",
-      image: '/asset/images/slide2.JPEG',
+      image: '/asset/images/slide1.jpeg',
       product_id: 102,
     },
     {
       id: 3,
       title: "عنوان 2",
-      image: '/asset/images/slide3.JPEG',
+      image: '/asset/images/slide1.jpeg',
       product_id: 102,
     },
  
