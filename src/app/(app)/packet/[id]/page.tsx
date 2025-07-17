@@ -86,9 +86,9 @@ export default function ProductDetailsPage() {
     <>
       <SmartNavbar />
       <Container>
-        <div className="grid lg:grid-cols-2 gap-10 py-12 px-6 sm:px-12 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 py-12 px-6 sm:px-12 max-w-7xl mx-auto ">
           {/* Images Section */}
-          <div className="w-full relative rounded-2xl shadow-xl overflow-hidden pt-8">
+          <div className="w-full relative rounded-2xl shadow-xl overflow-hidden pt-8 mt-24">
        {details.images && details.images.length > 1 ? (
   <Swiper
     modules={[Navigation, Pagination]}
@@ -101,7 +101,7 @@ export default function ProductDetailsPage() {
   >
     {details.images.map((img: string, i: number) => (
       <SwiperSlide key={i}>
-        <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl mt-16">
+        <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl mt-6 sm:mt-10 md:mt-28">
           <Image
             src={img}
             alt={`Product image ${i + 1}`}
@@ -127,7 +127,8 @@ export default function ProductDetailsPage() {
     </div>
   </Swiper>
 ) : details.images && details.images.length === 1 ? (
-  <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl shadow-md mt-16">
+  <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden rounded-xl shadow-md mt-6 sm:mt-10 md:mt-28">
+
     <Image
       src={details.images[0]}
       alt="Product"
