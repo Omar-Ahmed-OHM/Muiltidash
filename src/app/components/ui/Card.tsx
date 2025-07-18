@@ -22,7 +22,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <Container>
-      <div className="w-[300px] h-[380px] flex flex-col justify-between rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-[#e8f3f0] to-[#f8f8f8] hover:shadow-xl transition relative mx-auto group">
+      <div className="w-[300px] h-[380px] flex flex-col justify-between rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-gray-100 to-gray-200 hover:shadow-xl transition relative mx-auto group">
         
         {/* زر القلب */}
         <div className="absolute top-2 left-2 bg-gray-100 p-1 rounded-full cursor-pointer z-40" onClick={handleLoveToggle}>
@@ -58,13 +58,14 @@ export const Card: React.FC<CardProps> = ({
         </div>
 
         {/* المحتوى */}
-        <div className="p-4 flex flex-col justify-start flex-grow space-y-1 text-right" dir="rtl">
+        <div className="p-4 flex flex-col justify-start  flex-grow space-y-1 text-right" dir="rtl">
           <h2 className="text-sm font-bold text-gray-900 line-clamp-1">{title}</h2>
           <p className="text-xs text-gray-600 line-clamp-2">{description}</p>
 
           <div className="mt-1">
             <span className="font-bold text-sm text-black">
-ر.س            </span>
+ر.س         {price}  
+</span>
             {originalPrice && (
               <span className="text-gray-400 line-through text-xs ml-2">{originalPrice} ر.س</span>
             )}
