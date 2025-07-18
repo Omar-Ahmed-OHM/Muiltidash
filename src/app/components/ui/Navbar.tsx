@@ -7,7 +7,6 @@ import Logo from '../../../../public/asset/images/ويمي تك.jpg';
 import { motion, AnimatePresence } from 'framer-motion';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-import { CartAndOrdersResponseshoping } from '@/app/lib/type';
 import axios from 'axios';
 import { BaseUrl } from '../Baseurl';
 
