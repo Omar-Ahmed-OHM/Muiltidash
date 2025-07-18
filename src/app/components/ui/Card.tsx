@@ -67,7 +67,7 @@ export const Card: React.FC<CardProps> = ({
               {piece_price_after_offer ?? price} ج.م
             </span>
             {originalPrice && (
-              <span className="text-gray-400 line-through text-xs ml-2">{originalPrice} ج.م</span>
+              <span className="text-gray-400 line-through text-xs ml-2">{originalPrice} ر.س</span>
             )}
           </div>
 
@@ -81,7 +81,7 @@ export const Card: React.FC<CardProps> = ({
 
           {packet_price && packet_pieces !== undefined && (
             <p className="text-xs text-gray-600 mt-1">
-              بالكرتونة: {packet_price_after_offer ?? packet_price} ج.م ({packet_pieces} قطعة)
+              بالكرتونة: {packet_price_after_offer ?? packet_price} ر.س({packet_pieces} قطعة)
             </p>
           )}
 

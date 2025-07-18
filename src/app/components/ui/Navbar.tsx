@@ -19,7 +19,6 @@ const SmartNavbar = () => {
   const token_admin = Cookies.get("token_admin");
   const [allProducts, setAllProducts] = useState(0);
   const url = `${BaseUrl}users/shopping`;
-
   const controlNavbar = () => {
     const currentScrollY = window.scrollY;
     setVisible(currentScrollY < lastScrollY || currentScrollY < 80);
@@ -67,6 +66,7 @@ const SmartNavbar = () => {
   src={Logo}
   alt="شعار"
   className="w-[46px] h-[46px] rounded-full border-2 border-border-icon shadow-[0_0_12px_#10b981] transition-transform hover:scale-110"
+  unoptimized
 />
 
           </Link>
