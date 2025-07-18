@@ -100,7 +100,7 @@ export default function ViewTable() {
                     التاجر
                   </Link>
                 </td>
-                <td className="px-4 py-3">{product.price} ج.م</td>
+                <td className="px-4 py-3">{product.price} ر.س</td>
                 <td className="px-4 py-3">{product.stockQuantity}</td>
                 <td className="px-4 py-3">
                   {new Date(product.createdAt).toLocaleDateString("ar-EG")}
@@ -160,7 +160,7 @@ export default function ViewTable() {
               </div>
             </div>
             <div className="space-y-1 text-sm text-gray-700">
-              <p><span className="font-semibold">السعر:</span> {product.price} ج.م</p>
+              <p><span className="font-semibold">السعر:</span> {product.price} ر.س</p>
               <p><span className="font-semibold">الكمية:</span> {product.stockQuantity}</p>
               <p>
                 <span className="font-semibold">تاريخ الإضافة:</span>{" "}

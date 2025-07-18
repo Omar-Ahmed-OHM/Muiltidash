@@ -64,8 +64,7 @@ export const Card: React.FC<CardProps> = ({
 
           <div className="mt-1">
             <span className="font-bold text-sm text-black">
-              {piece_price_after_offer ?? price} ج.م
-            </span>
+ر.س            </span>
             {originalPrice && (
               <span className="text-gray-400 line-through text-xs ml-2">{originalPrice} ر.س</span>
             )}
