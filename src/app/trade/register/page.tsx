@@ -21,11 +21,13 @@ export default function RegisterPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fields: FieldForm[] = [
-    { name: "firstName", label: "الاسم الاول", type: "text", placeholder: "ادخل اسمك الاول" },
-    { name: "lastName", label: "الاسم الاخير", type: "text", placeholder: "ادخل اسمك الاخير" },
-    { name: "email", label: "البريد الإلكتروني", type: "email", placeholder: "ادخل بريدك الالكتروني" },
-    { name: "phoneNumber", label: "رقم الهاتف", type: "text", placeholder: "ادخل رقم هاتفك" },
-    { name: "password", label: "الرقم السري", type: "password", placeholder: "ادخل الرقم السري" },
+    { name: "firstName", label: "الاسم الاول", type: "text", placeholder: "ادخل اسمك الاول" ,requierd:true },
+    { name: "lastName", label: "الاسم الاخير", type: "text", placeholder: "ادخل اسمك الاخير",requierd:true },
+    { name: "email", label: "البريد الإلكتروني", type: "email", placeholder: "ادخل بريدك الالكتروني",requierd:true },
+    { name: "phoneNumber", label: "رقم الهاتف", type: "text", placeholder: "ادخل رقم هاتفك",requierd:true },
+    { name: "password", label: "الرقم السري", type: "password", placeholder: "ادخل الرقم السري" ,requierd:true},
+    { name: "address", label: "العنوان", type: "text", placeholder: "ادخل العنوان" ,requierd:true},
+    { name: "googleMapLink", label: "لينك جوجل ماب", type: "url", placeholder: "ادخل لينك  الموقع" ,requierd:true},
   ];
 
   const url = `${BaseUrl}traders/signup`;

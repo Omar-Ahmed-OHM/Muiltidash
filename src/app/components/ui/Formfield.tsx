@@ -123,6 +123,7 @@ export default function FormField({ fields, data, onChange }: Props) {
                 onChange={(e) => handelchange(field.name, e.target.value)}
                 placeholder={field.placeholder}
                 className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                required={field.requierd}
               />
             )}
           </div>

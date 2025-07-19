@@ -19,6 +19,7 @@ import {
   FaWhatsapp
 } from 'react-icons/fa6';
 import Logo from '../../../../public/asset/images/ويمي تك.jpg';
+import saudi from '../../../../public/asset/images/المعرض السعودى للاعمال.jpg';
 import { Dialog } from '@headlessui/react';
 
 const Footer: React.FC = () => {
@@ -49,6 +50,9 @@ const Footer: React.FC = () => {
                 <Link href="https://t.snapchat.com/pQUnE4iA" className="hover:text-yellow-400 transition" target="_blank"><FaSnapchat size={18} /></Link>
                 <Link href="https://www.tiktok.com/@wimi.sa" className="hover:text-white transition" target="_blank"><FaTiktok size={18} /></Link>
                 <Link href="https://x.com/wimi_sa" className="hover:text-blue-400 transition" target="_blank"><FaXTwitter size={18} /></Link>
+                <Link href={'/saudi'} className="hover:text-blue-400 transition">
+                <Image src={saudi} width={20} height={20} alt='saudi' unoptimized/>
+                </Link> 
               </div>
             </div>
 
