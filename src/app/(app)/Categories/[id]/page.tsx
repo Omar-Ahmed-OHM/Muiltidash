@@ -150,7 +150,7 @@ export default function ProductDetailsPage() {
               <h2 className="text-3xl font-bold text-[#1e293b] mb-4">📦 تفاصيل المنتج</h2>
               <ul className="space-y-3 text-gray-800 text-base sm:text-lg">
                 <li><span className="font-semibold text-gray-600">اسم المنتج:</span> {details.title}</li>
-                <li><span className="font-semibold text-gray-600">السعر:</span> <span className="text-green-700 font-bold">{details.price} جنيه</span></li>
+                <li><span className="font-semibold text-gray-600">السعر:</span> <span className="text-green-700 font-bold">{details.price} ريال سعودى</span></li>
                 <li><span className="font-semibold text-gray-600">القسم:</span> {details.category}</li>
                 <li><span className="font-semibold text-gray-600">الكمية المتاحة:</span> {details.stockQuantity}</li>
                 <li><span className="font-semibold text-gray-600">الوصف:</span> {details.description}</li>

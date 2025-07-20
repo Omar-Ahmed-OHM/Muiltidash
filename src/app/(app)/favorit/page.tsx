@@ -9,6 +9,7 @@ import Container from "@/app/components/Container";
 import SmartNavbar from "@/app/components/ui/Navbar";
 import toast from "react-hot-toast";
 import { LoginRequiredModal } from "@/app/components/ui/Pop-up-login";
+import React from "react";
 
 const urlfav = `${BaseUrl}users/favorites`;
 
@@ -113,6 +114,7 @@ export default function Favorite() {
             ))}
           </div>
         )}
+
       </Container>
     </>
   );

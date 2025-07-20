@@ -198,7 +198,7 @@ export default function Favorite() {
           <div>
             <h3 className="text-base sm:text-lg font-bold text-[#3F0F59]">{product.title}</h3>
             <p className="text-xs sm:text-sm text-gray-500 line-clamp-2">{product.description}</p>
-            <p className="text-sm sm:text-base font-semibold text-[#5B21B6] mt-1">{product.price} ج.م</p>
+            <p className="text-sm sm:text-base font-semibold text-[#5B21B6] mt-1">{product.price} ر.س</p>
 
             {product.type === 'order' && (
               <span className="inline-block text-[10px] sm:text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded-full mt-1">

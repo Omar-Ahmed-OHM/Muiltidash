@@ -40,21 +40,24 @@ export default function RegisterPage() {
     }
 
     try {
-      const res: ApiResponse<signup_user> = await axios.post(url, formData, {
-        validateStatus: () => true,
-      });
+  const response = await axios.post<ApiResponse<signup_user>>(url, formData, {
+  validateStatus: () => true,
+});
 
-      const status = res.status;
+const status = response.status;
+const message = response.data.message;
 
+      console.log(message);
+      
       if (status === 200 || status === 201) {
         toast.success('تم تسجيل الدخول بنجاح 🎉');
         router.push("/trade/login_trade");
       } else if (status === 400) {
-        toast.error('البيانات غير صحيحة، تحقق من الإدخال');
+        toast.error(`${message}`);
       } else if (status === 401) {
-        toast.error('غير مصرح، تحقق من البريد أو كلمة المرور');
+        toast.error(message);
       } else if (status === 409) {
-        toast.error('المستخدم موجود بالفعل');
+        toast.error(message);
       } else if (status === 500) {
         toast.error('خطأ في السيرفر، حاول لاحقًا');
       } else {
