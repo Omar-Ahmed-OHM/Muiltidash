@@ -420,3 +420,52 @@ export interface Productreport {
   createdAt: string;
   __v: number;
 }
+
+
+
+
+//// admin pannel 
+
+export interface Main_Admin_pannel{
+        totalUsers:number,
+        waitingTraders:number,
+        totalOrders: number,
+        totalEarnings: string,
+        adminEarnings: string,
+        tradersEarnings: string,
+}
+
+
+
+/////////users admin pannel 
+export interface Users_admin_pannel{
+      _id:string,
+      firstName: string,
+      lastName:string,
+      email:string,
+      phoneNumber:string,
+      createdAt: string,
+      __v: 0
+    }
+
+
+
+    export interface traders_admin_pannel extends Users_admin_pannel {
+      address: string
+      googleMapLink: string
+      block: boolean
+      verify: boolean
+    }
+  export interface ResponseData {
+  users: Users_admin_pannel[]
+  traders: traders_admin_pannel[]
+  pagination: {
+    page?: number
+    limit?: number
+    totalUsers?: number
+    totalTraders?: number
+    totalUserPages: number
+    totalTraderPages: number
+  }
+}
+//////// post users or traders admin pannel
