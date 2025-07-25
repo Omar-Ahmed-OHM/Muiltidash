@@ -1,6 +1,6 @@
 'use client'
 import { BaseUrl } from '@/app/components/Baseurl'
-import Pagination from '@/app/components/Pagination'
+import PaginationComp from '@/app/components/Pagination'
 import { ResponseData } from '@/app/lib/type'
 import axios from 'axios'
 import moment from 'moment'
@@ -18,7 +18,7 @@ export default function UsersAndTradersPage() {
     try {
       const res = await axios.get(`${urlUsers_Trader}?page=${page}`)
     setData({
-  users: res.data.data.users,
+    users: res.data.data.users,
   traders: res.data.data.traders,
   pagination: {
     totalUserPages: res.data.data.pagination.totalUserPages,
@@ -39,18 +39,17 @@ export default function UsersAndTradersPage() {
     fetchData()
   }, [page])
 
-  const performAction = async (id: string, type: 'del' | 'block', role: 'user' | 'trader') => {
-    try {
-      await axios.post(`${urlUsers_Trader}/${id}/${type}`, {}, {
-        headers: {
-          role,
-        },
-      })
-      fetchData()
-    } catch (error) {
-      toast.error('حدث خطأ أثناء تنفيذ العملية')
-    }
+const performAction = async (id: string, type: 'del' | 'block', role: 'user' | 'trader') => {
+  try {
+    await axios.post(`${urlUsers_Trader}/${id}/${type}`, {}, {
+      params: { role }, 
+      });
+    fetchData();
+  } catch (error) {
+    toast.error('حدث خطأ أثناء تنفيذ العملية');
   }
+};
+
 
   const handleDelete = (id: string, role: 'user' | 'trader') => {
     if (confirm('هل أنت متأكد من حذف هذا الحساب؟')) {
@@ -97,116 +96,115 @@ export default function UsersAndTradersPage() {
       </tr>
     </thead>
   )
+return (
+  <div className="p-4 md:p-6 space-y-12 max-w-7xl mx-auto">
+    {/* Users Section */}
+    <section>
+      <h2 className="text-xl font-bold mb-4">📋 المستخدمين</h2>
 
-  return (
-    <div className="p-4 md:p-6 space-y-12 max-w-7xl mx-auto">
-      {/* Users Section */}
-      <section>
-        <h2 className="text-xl font-bold mb-4">📋 المستخدمين</h2>
+      {/* Cards View (mobile + tablet) */}
+      <div className="space-y-4 lg:hidden">
+        {data?.users.length === 0 ? (
+          <p className="text-center text-gray-500">لا يوجد مستخدمين في هذه الصفحة.</p>
+        ) : (
+          data?.users.map((user) => (
+            <UserCard key={user._id} user={user} role="user" />
+          ))
+        )}
+      </div>
 
-        {/* Mobile Cards */}
-        <div className="space-y-4 md:hidden">
-          {data?.users.length === 0 ? (
-            <p className="text-center text-gray-500">لا يوجد مستخدمين في هذه الصفحة.</p>
-          ) : (
-            data?.users.map((user) => (
-              <UserCard key={user._id} user={user} role="user" />
-            ))
-          )}
-        </div>
+      {/* Table View (desktop only) */}
+      <div className="hidden lg:block overflow-x-auto shadow rounded-lg border border-gray-200">
+        {data?.users.length === 0 ? (
+          <p className="text-center text-gray-500 p-4">لا يوجد مستخدمين في هذه الصفحة.</p>
+        ) : (
+          <table className="min-w-full bg-white text-sm">
+            <TableHeader headers={['الاسم', 'الإيميل', 'رقم الهاتف', 'تاريخ التسجيل', 'التحكم']} />
+            <tbody>
+              {data?.users.map((user) => (
+                <tr key={user._id} className="border-t hover:bg-gray-50">
+                  <td className="p-3 whitespace-nowrap">{user.firstName} {user.lastName}</td>
+                  <td className="p-3 whitespace-nowrap">{user.email}</td>
+                  <td className="p-3 whitespace-nowrap">{user.phoneNumber}</td>
+                  <td className="p-3 whitespace-nowrap">{moment(user.createdAt).format('YYYY/MM/DD HH:mm')}</td>
+                  <td className="p-3">
+                    <div className="flex justify-end gap-2">
+                      <button title="حظر" onClick={() => handleBlock(user._id, 'user')} className="text-red-500 hover:text-red-700">
+                        <Ban className="w-5 h-5" />
+                      </button>
+                      <button title="حذف" onClick={() => handleDelete(user._id, 'user')} className="text-gray-600 hover:text-black">
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </section>
 
-        {/* Table View */}
-        <div className="hidden md:block overflow-x-auto shadow rounded-lg border border-gray-200">
-          {data?.users.length === 0 ? (
-            <p className="text-center text-gray-500 p-4">لا يوجد مستخدمين في هذه الصفحة.</p>
-          ) : (
-            <table className="min-w-full bg-white text-sm">
-              <TableHeader headers={['الاسم', 'الإيميل', 'رقم الهاتف', 'تاريخ التسجيل', 'التحكم']} />
-              <tbody>
-                {data?.users.map((user) => (
-                  <tr key={user._id} className="border-t hover:bg-gray-50">
-                    <td className="p-3 whitespace-nowrap">{user.firstName} {user.lastName}</td>
-                    <td className="p-3 whitespace-nowrap">{user.email}</td>
-                    <td className="p-3 whitespace-nowrap">{user.phoneNumber}</td>
-                    <td className="p-3 whitespace-nowrap">{moment(user.createdAt).format('YYYY/MM/DD HH:mm')}</td>
-                    <td className="p-3">
-                      <div className="flex justify-end gap-2">
-                        <button title="حظر" onClick={() => handleBlock(user._id, 'user')} className="text-red-500 hover:text-red-700">
-                          <Ban className="w-5 h-5" />
-                        </button>
-                        <button title="حذف" onClick={() => handleDelete(user._id, 'user')} className="text-gray-600 hover:text-black">
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </section>
+    {/* Traders Section */}
+    <section>
+      <h2 className="text-xl font-bold mb-4">🛒 التجّار</h2>
 
-      {/* Traders Section */}
-      <section>
-        <h2 className="text-xl font-bold mb-4">🛒 التجّار</h2>
+      {/* Cards View (mobile + tablet) */}
+      <div className="space-y-4 lg:hidden">
+        {data?.traders.length === 0 ? (
+          <p className="text-center text-gray-500">لا يوجد تجّار في هذه الصفحة.</p>
+        ) : (
+          data?.traders.map((trader) => (
+            <UserCard key={trader._id} user={trader} role="trader" />
+          ))
+        )}
+      </div>
 
-        {/* Mobile Cards */}
-        <div className="space-y-4 md:hidden">
-          {data?.traders.length === 0 ? (
-            <p className="text-center text-gray-500">لا يوجد تجّار في هذه الصفحة.</p>
-          ) : (
-            data?.traders.map((trader) => (
-              <UserCard key={trader._id} user={trader} role="trader" />
-            ))
-          )}
-        </div>
+      {/* Table View (desktop only) */}
+      <div className="hidden lg:block overflow-x-auto shadow rounded-lg border border-gray-200">
+        {data?.traders.length === 0 ? (
+          <p className="text-center text-gray-500 p-4">لا يوجد تجّار في هذه الصفحة.</p>
+        ) : (
+          <table className="min-w-full bg-white text-sm">
+            <TableHeader headers={['الاسم', 'الإيميل', 'رقم الهاتف', 'العنوان', 'تاريخ التسجيل', 'التحكم']} />
+            <tbody>
+              {data?.traders.map((trader) => (
+                <tr key={trader._id} className="border-t hover:bg-gray-50">
+                  <td className="p-3 whitespace-nowrap">{trader.firstName} {trader.lastName}</td>
+                  <td className="p-3 whitespace-nowrap">{trader.email}</td>
+                  <td className="p-3 whitespace-nowrap">{trader.phoneNumber}</td>
+                  <td className="p-3 whitespace-nowrap">{trader.address}</td>
+                  <td className="p-3 whitespace-nowrap">{moment(trader.createdAt).format('YYYY/MM/DD HH:mm')}</td>
+                  <td className="p-3">
+                    <div className="flex justify-end gap-2">
+                      <button title="حظر" onClick={() => handleBlock(trader._id, 'trader')} className="text-red-500 hover:text-red-700">
+                        <Ban className="w-5 h-5" />
+                      </button>
+                      <button title="حذف" onClick={() => handleDelete(trader._id, 'trader')} className="text-gray-600 hover:text-black">
+                        <Trash2 className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </section>
 
-        {/* Table View */}
-        <div className="hidden md:block overflow-x-auto shadow rounded-lg border border-gray-200">
-          {data?.traders.length === 0 ? (
-            <p className="text-center text-gray-500 p-4">لا يوجد تجّار في هذه الصفحة.</p>
-          ) : (
-            <table className="min-w-full bg-white text-sm">
-              <TableHeader headers={['الاسم', 'الإيميل', 'رقم الهاتف', 'العنوان', 'تاريخ التسجيل', 'التحكم']} />
-              <tbody>
-                {data?.traders.map((trader) => (
-                  <tr key={trader._id} className="border-t hover:bg-gray-50">
-                    <td className="p-3 whitespace-nowrap">{trader.firstName} {trader.lastName}</td>
-                    <td className="p-3 whitespace-nowrap">{trader.email}</td>
-                    <td className="p-3 whitespace-nowrap">{trader.phoneNumber}</td>
-                    <td className="p-3 whitespace-nowrap">{trader.address}</td>
-                    <td className="p-3 whitespace-nowrap">{moment(trader.createdAt).format('YYYY/MM/DD HH:mm')}</td>
-                    <td className="p-3">
-                      <div className="flex justify-end gap-2">
-                        <button title="حظر" onClick={() => handleBlock(trader._id, 'trader')} className="text-red-500 hover:text-red-700">
-                          <Ban className="w-5 h-5" />
-                        </button>
-                        <button title="حذف" onClick={() => handleDelete(trader._id, 'trader')} className="text-gray-600 hover:text-black">
-                          <Trash2 className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </section>
+    {/* Shared Pagination */}
+    <PaginationComp
+      page={page}
+      totalPages={
+        Math.max(
+          data?.pagination.totalUserPages || 1,
+          data?.pagination.totalTraderPages || 1
+        )
+      }
+      onPageChange={setPage}
+    />
+  </div>
+)
 
-      {/* Shared Pagination */}
- <Pagination
-  page={page}
-  totalPages={
-    Math.max(
-      data?.pagination.totalUserPages || 1,
-      data?.pagination.totalTraderPages || 1
-    )
-  }
-  onPageChange={setPage}
-/>
-
-    </div>
-  )
 }

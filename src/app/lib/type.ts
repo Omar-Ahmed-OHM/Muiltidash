@@ -469,3 +469,32 @@ export interface Users_admin_pannel{
   }
 }
 //////// post users or traders admin pannel
+
+
+export interface User_waiting {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  verify: boolean;
+  address: string;
+  googleMapLink: string;
+  block: boolean;
+  waiting: boolean;
+  createdAt: string; 
+  __v: number;
+    pagination: Pagination
+}
+///////////////
+
+export interface Traderprofits{
+    traderName:string,
+    traderId:string,
+    phoneNumber:number,
+    totalProfit: number
+}
+export interface Total_Profits{
+  platformProfit: number
+}

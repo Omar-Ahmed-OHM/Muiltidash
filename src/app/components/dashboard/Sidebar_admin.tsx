@@ -1,14 +1,14 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, PackagePlus, Settings,  Menu, UserCog } from 'lucide-react'
+import { LayoutDashboard, TrendingUp , Settings,  Menu, UserCog, User } from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [
   { href: '/dashboard_admin', label: 'الرئيسية', icon: LayoutDashboard },
   { href: '/dashboard_admin/main_users', label: 'اداره المستخدمين', icon: UserCog },
-  // { href: '/admin/update', label: 'الإعدادات', icon: Settings },
-//   { href: '/dashboard_admin/user_cog', label: 'عرض المنتجات', icon: UserCog },
+  { href: '/dashboard_admin/user_waiting', label: 'قائمه الانتظار', icon: User },
+  { href: '/dashboard_admin/profits', label: 'الارباح', icon: TrendingUp  },
 ]
 
 export default function Sidebar_admin() {

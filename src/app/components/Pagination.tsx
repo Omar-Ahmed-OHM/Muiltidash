@@ -7,9 +7,8 @@ interface PaginationProps {
   onPageChange: (page: number) => void
 }
 
-const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPageChange }) => {
+const PaginationComp: React.FC<PaginationProps> = ({ page, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null
-
   const generatePages = () => {
     const pages: (number | string)[] = []
 
@@ -69,4 +68,4 @@ const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPageChange 
   )
 }
 
-export default Pagination
+export default PaginationComp
