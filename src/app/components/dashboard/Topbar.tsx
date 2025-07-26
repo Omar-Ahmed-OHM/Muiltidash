@@ -7,10 +7,18 @@ import Link from 'next/link'
 import Cookies from 'js-cookie';
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { BaseUrl } from '../Baseurl'
 export default function Topbar() {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router=useRouter();
+
+    const get_user_notification = `${BaseUrl}users/getMyNotification`;
+      const [allnotificatio, setAllnotificatio] = useState(0);
+    
+    const token = Cookies.get("token_admin");
+
   const logout = () => {
     Cookies.remove('token_admin');
         setTimeout(() => {
@@ -19,6 +27,21 @@ export default function Topbar() {
 }, 500);
     setOpenMenu(false);
   }
+
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get(get_user_notification, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setAllnotificatio(res.data.data.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -63,14 +86,7 @@ export default function Topbar() {
 
       {/* الإشعارات واليوزر */}
       <div className="relative flex items-center gap-3 text-border-icon" ref={menuRef}>
-        <motion.button
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          whileTap={{ scale: 0.9 }}
-          className="p-2 rounded-full hover:bg-[#EEDCFB] transition-colors"
-          aria-label="الإشعارات"
-        >
-          <Bell size={20} />
-        </motion.button>
+     
 
         {/* زر اليوزر لفتح القائمة */}
         <motion.button
@@ -82,6 +98,22 @@ export default function Topbar() {
         >
           <User2 size={20} />
         </motion.button>
+<motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+  className="relative p-2 rounded-full hover:bg-[#EEDCFB] transition-colors"
+  aria-label="حساب المستخدم"
+>
+  <Link href="/admin/notification" className="relative flex items-center justify-center">
+    <Bell size={20} />
+    {allnotificatio > 0 && (
+      <span className="absolute -top-1 -right-3 bg-[#f0a136] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+        {allnotificatio}
+      </span>
+    )}
+  </Link>
+</motion.button>
+
 
         {/* منيو منسدلة */}
         <AnimatePresence>

@@ -5,8 +5,9 @@ import { ResponseData } from '@/app/lib/type'
 import axios from 'axios'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import { Trash2, Ban } from 'lucide-react'
+import { Trash2, Ban, Bell } from 'lucide-react'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 
 export default function UsersAndTradersPage() {
   const [data, setData] = useState<ResponseData>()
@@ -83,6 +84,9 @@ const performAction = async (id: string, type: 'del' | 'block', role: 'user' | '
         <button title="حذف" onClick={() => handleDelete(user._id, role)} className="text-gray-600 hover:text-black transition">
           <Trash2 className="w-5 h-5" />
         </button>
+        <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
+                        <Bell className="w-5 h-5" />
+                      </Link>
       </div>
     </div>
   )
@@ -135,6 +139,10 @@ return (
                       <button title="حذف" onClick={() => handleDelete(user._id, 'user')} className="text-gray-600 hover:text-black">
                         <Trash2 className="w-5 h-5" />
                       </button>
+
+                       <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
+                        <Bell className="w-5 h-5" />
+                      </Link>
                     </div>
                   </td>
                 </tr>
@@ -183,6 +191,9 @@ return (
                       <button title="حذف" onClick={() => handleDelete(trader._id, 'trader')} className="text-gray-600 hover:text-black">
                         <Trash2 className="w-5 h-5" />
                       </button>
+                      <Link href={`/dashboard_admin/notification/${trader._id}`} className="text-gray-600 hover:text-black">
+                        <Bell className="w-5 h-5" />
+                      </Link>
                     </div>
                   </td>
                 </tr>

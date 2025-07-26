@@ -109,7 +109,7 @@ export default function SearchPagination() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-white/70 border border-white/30 backdrop-blur-lg rounded-xl shadow-xl overflow-hidden hover:scale-105 hover:shadow-2xl transition-all duration-300"
+                className="bg-white/70 border border-white/30 backdrop-blur-lg p-6 rounded-xl shadow-xl overflow-hidden hover:scale-105 hover:shadow-2xl transition-all duration-300"
               >
                 <img
                   src={item.images?.[0]}
@@ -121,7 +121,7 @@ export default function SearchPagination() {
                   <p className="text-sm text-gray-600 mt-1 line-clamp-2">
                     {item.description}
                   </p>
-                  <p className="mt-2 text-purple-700 font-semibold">{item.price} جنيه</p>
+                  <p className="mt-2 text-purple-700 font-semibold">{item.price} ريال سعودى</p>
                 </div>
               </motion.div>
             ))}

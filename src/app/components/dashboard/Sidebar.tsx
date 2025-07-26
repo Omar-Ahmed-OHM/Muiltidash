@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, PackagePlus, Settings, View, Menu } from 'lucide-react'
+import { LayoutDashboard, PackagePlus, Settings, View, Menu, Bell } from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [
@@ -9,6 +9,7 @@ const navItems = [
   { href: '/admin/add-product', label: 'إضافة منتج', icon: PackagePlus },
   // { href: '/admin/update', label: 'الإعدادات', icon: Settings },
   { href: '/admin/view', label: 'عرض المنتجات', icon: View },
+  { href: '/admin/notification', label: 'عرض الاشعارات', icon: Bell },
 ]
 
 export default function Sidebar() {

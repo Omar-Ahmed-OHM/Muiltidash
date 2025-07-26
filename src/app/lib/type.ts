@@ -498,3 +498,17 @@ export interface Traderprofits{
 export interface Total_Profits{
   platformProfit: number
 }
+
+export interface Send_Notification {
+    type:string,
+    text:string,
+    userId:string
+}
+export interface userNotigication{
+    _id: string,
+            type: string,
+            userId: string,
+            text: string,
+            createdAt: string,
+            __v: 0
+}

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, ShoppingCart, Heart, User2 } from 'lucide-react';
+import { Search, ShoppingCart, Heart, User2, Bell } from 'lucide-react';
 import Logo from '../../../../public/asset/images/ويمي تك.jpg';
 import { motion, AnimatePresence } from 'framer-motion';
 import Cookies from 'js-cookie';
@@ -18,7 +18,9 @@ const SmartNavbar = () => {
   const token = Cookies.get("token");
   const token_admin = Cookies.get("token_admin");
   const [allProducts, setAllProducts] = useState(0);
+  const [allnotificatio, setAllnotificatio] = useState(0);
   const url = `${BaseUrl}users/shopping`;
+  const get_user_notification = `${BaseUrl}users/getMyNotification`;
   const controlNavbar = () => {
     const currentScrollY = window.scrollY;
     setVisible(currentScrollY < lastScrollY || currentScrollY < 80);
@@ -50,7 +52,19 @@ const SmartNavbar = () => {
     };
     fetchProducts();
   }, []);
-
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get(get_user_notification, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setAllnotificatio(res.data.data.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProducts();
+  }, []);
   return (
     <>
   <header
@@ -119,6 +133,22 @@ const SmartNavbar = () => {
                 </div>
                 <span className="absolute -top-1 -right-1 bg-[#f0a136] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-lg">
                   {allProducts}
+                </span>
+              </div>
+            </Link>
+
+               <div className="border-l border-white/30 h-6 mx-1" />
+
+            <Link
+              href="/user_notification"
+              className="flex flex-col items-center hover:text-yellow-400 transition transform hover:scale-110"
+            >
+              <div className="relative">
+                <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition border-[2px] border-border-icon">
+                  <Bell size={20} />
+                </div>
+                <span className="absolute -top-1 -right-1 bg-[#f0a136] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-lg">
+                  {allnotificatio}
                 </span>
               </div>
             </Link>
