@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   if (tokenuser && pathname === '/register' || tokenuser && pathname === '/login') {
     return NextResponse.redirect(new URL('/', request.url));
   }
-  if(!tokenuser && pathname === '/payment'){
+  if(!tokenuser &&pathname.startsWith('/payment')){
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
