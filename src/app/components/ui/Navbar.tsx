@@ -106,7 +106,7 @@ const SmartNavbar = () => {
               name="btn"
             >
               <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition border-[2px] border-border-icon">
-                <User2 size={20} />
+                <User2 size={18} />
               </div>
             </button>
 
@@ -117,7 +117,7 @@ const SmartNavbar = () => {
               className="flex flex-col items-center hover:text-pink-300 transition transform hover:scale-110"
             >
               <div className="p-2 rounded-full bg-white/10 hover:bg-pink-300/20 transition border-[2px] border-border-icon">
-                <Heart size={20} />
+                <Heart size={18} />
               </div>
             </Link>
 
@@ -129,7 +129,7 @@ const SmartNavbar = () => {
             >
               <div className="relative">
                 <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition border-[2px] border-border-icon">
-                  <ShoppingCart size={20} />
+                  <ShoppingCart size={18} />
                 </div>
                 <span className="absolute -top-1 -right-1 bg-[#f0a136] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-lg">
                   {allProducts}
@@ -145,7 +145,7 @@ const SmartNavbar = () => {
             >
               <div className="relative">
                 <div className="p-2 rounded-full bg-white/10 hover:bg-yellow-400/20 transition border-[2px] border-border-icon">
-                  <Bell size={20} />
+                  <Bell size={18} />
                 </div>
                 <span className="absolute -top-1 -right-1 bg-[#f0a136] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-lg">
                   {allnotificatio}

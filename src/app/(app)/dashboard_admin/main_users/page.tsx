@@ -20,8 +20,8 @@ export default function UsersAndTradersPage() {
       const res = await axios.get(`${urlUsers_Trader}?page=${page}`)
     setData({
     users: res.data.data.users,
-  traders: res.data.data.traders,
-  pagination: {
+    traders: res.data.data.traders,
+    pagination: {
     totalUserPages: res.data.data.pagination.totalUserPages,
     totalTraderPages: res.data.data.pagination.totalTraderPages,
     totalUsers: res.data.data.pagination.totalUsers,
@@ -78,17 +78,25 @@ const performAction = async (id: string, type: 'del' | 'block', role: 'user' | '
       {role === 'trader' && <p><span className="font-semibold">📍 العنوان:</span> {user.address}</p>}
       <p><span className="font-semibold">🕓 التسجيل:</span> {moment(user.createdAt).format('YYYY/MM/DD HH:mm')}</p>
       <div className="flex gap-2 justify-end pt-2">
-        <button title="حظر" onClick={() => handleBlock(user._id, role)} className="text-red-500 hover:text-red-700 transition">
-          <Ban className="w-5 h-5" />
-        </button>
-        <button title="حذف" onClick={() => handleDelete(user._id, role)} className="text-gray-600 hover:text-black transition">
-          <Trash2 className="w-5 h-5" />
-        </button>
-        <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
-                        <Bell className="w-5 h-5" />
-                      </Link>
+{role === 'trader' ? (
+  <>
+    <button title="حظر" onClick={() => handleBlock(user._id, role)} className="text-red-500 hover:text-red-700 transition">
+      <Ban className="w-5 h-5" />
+    </button>
+    <button title="حذف" onClick={() => handleDelete(user._id, role)} className="text-gray-600 hover:text-black transition">
+      <Trash2 className="w-5 h-5" />
+    </button>
+    <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
+      <Bell className="w-5 h-5" />
+    </Link>
+  </>
+) : (
+  <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
+    <Bell className="w-5 h-5" />
+  </Link>
+)}
       </div>
-    </div>
+      </div>
   )
 
   const TableHeader = ({ headers }: { headers: string[] }) => (
@@ -102,58 +110,7 @@ const performAction = async (id: string, type: 'del' | 'block', role: 'user' | '
   )
 return (
   <div className="p-4 md:p-6 space-y-12 max-w-7xl mx-auto">
-    {/* Users Section */}
-    <section>
-      <h2 className="text-xl font-bold mb-4">📋 المستخدمين</h2>
-
-      {/* Cards View (mobile + tablet) */}
-      <div className="space-y-4 lg:hidden">
-        {data?.users.length === 0 ? (
-          <p className="text-center text-gray-500">لا يوجد مستخدمين في هذه الصفحة.</p>
-        ) : (
-          data?.users.map((user) => (
-            <UserCard key={user._id} user={user} role="user" />
-          ))
-        )}
-      </div>
-
-      {/* Table View (desktop only) */}
-      <div className="hidden lg:block overflow-x-auto shadow rounded-lg border border-gray-200">
-        {data?.users.length === 0 ? (
-          <p className="text-center text-gray-500 p-4">لا يوجد مستخدمين في هذه الصفحة.</p>
-        ) : (
-          <table className="min-w-full bg-white text-sm">
-            <TableHeader headers={['الاسم', 'الإيميل', 'رقم الهاتف', 'تاريخ التسجيل', 'التحكم']} />
-            <tbody>
-              {data?.users.map((user) => (
-                <tr key={user._id} className="border-t hover:bg-gray-50">
-                  <td className="p-3 whitespace-nowrap">{user.firstName} {user.lastName}</td>
-                  <td className="p-3 whitespace-nowrap">{user.email}</td>
-                  <td className="p-3 whitespace-nowrap">{user.phoneNumber}</td>
-                  <td className="p-3 whitespace-nowrap">{moment(user.createdAt).format('YYYY/MM/DD HH:mm')}</td>
-                  <td className="p-3">
-                    <div className="flex justify-end gap-2">
-                      <button title="حظر" onClick={() => handleBlock(user._id, 'user')} className="text-red-500 hover:text-red-700">
-                        <Ban className="w-5 h-5" />
-                      </button>
-                      <button title="حذف" onClick={() => handleDelete(user._id, 'user')} className="text-gray-600 hover:text-black">
-                        <Trash2 className="w-5 h-5" />
-                      </button>
-
-                       <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
-                        <Bell className="w-5 h-5" />
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-    </section>
-
-    {/* Traders Section */}
+       {/* Traders Section */}
     <section>
       <h2 className="text-xl font-bold mb-4">🛒 التجّار</h2>
 
@@ -184,7 +141,7 @@ return (
                   <td className="p-3 whitespace-nowrap">{trader.address}</td>
                   <td className="p-3 whitespace-nowrap">{moment(trader.createdAt).format('YYYY/MM/DD HH:mm')}</td>
                   <td className="p-3">
-                    <div className="flex justify-end gap-2">
+                    <div className="flex text-center items-center pb-4 whitespace-nowrap gap-2">
                       <button title="حظر" onClick={() => handleBlock(trader._id, 'trader')} className="text-red-500 hover:text-red-700">
                         <Ban className="w-5 h-5" />
                       </button>
@@ -203,6 +160,51 @@ return (
         )}
       </div>
     </section>
+    {/* Users Section */}
+    <section>
+      <h2 className="text-xl font-bold mb-4">📋 المستخدمين</h2>
+
+      {/* Cards View (mobile + tablet) */}
+      <div className="space-y-4 lg:hidden">
+        {data?.users.length === 0 ? (
+          <p className="text-center text-gray-500">لا يوجد مستخدمين في هذه الصفحة.</p>
+        ) : (
+          data?.users.map((user) => (
+            <UserCard key={user._id} user={user} role="user" />
+          ))
+        )}
+      </div>
+
+      {/* Table View (desktop only) */}
+      <div className="hidden lg:block overflow-x-auto shadow rounded-lg border border-gray-200">
+        {data?.users.length === 0 ? (
+          <p className="text-center text-gray-500 p-4">لا يوجد مستخدمين في هذه الصفحة.</p>
+        ) : (
+          <table className="min-w-full bg-white text-sm">
+            <TableHeader headers={['الاسم', 'الإيميل', 'رقم الهاتف', 'تاريخ التسجيل', 'التحكم']} />
+            <tbody>
+              {data?.users.map((user) => (
+                <tr key={user._id} className="border-t hover:bg-gray-50">
+                  <td className="p-3 whitespace-nowrap">{user.firstName} {user.lastName}</td>
+                  <td className="p-3 whitespace-nowrap">{user.email}</td>
+                  <td className="p-3 whitespace-nowrap">{user.phoneNumber}</td>
+                  <td className="p-3 whitespace-nowrap">{moment(user.createdAt).format('YYYY/MM/DD HH:mm')}</td>
+                  <td className="p-3">
+                    <div className="flex  text-center items-center p-3 whitespace-nowrap gap-2">
+                       <Link href={`/dashboard_admin/notification/${user._id}`} className="text-gray-600 hover:text-black">
+                        <Bell className="w-5 h-5" />
+                      </Link>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </section>
+
+ 
 
     {/* Shared Pagination */}
     <PaginationComp

@@ -18,7 +18,7 @@ export interface ApiResponse<T>{
 export interface FieldForm {
   name: string;
   label: string;
-  type: "text" | "number" | "email" | "select"|"password"|'phoneNumber'|"url";
+  type: "text" | "number" | "email" | "select"|"password"|'phoneNumber'|"url"|"file";
   options?: string[];       
   fetchUrl?: string;
   placeholder?:string 

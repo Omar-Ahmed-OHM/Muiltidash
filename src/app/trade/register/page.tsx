@@ -27,47 +27,67 @@ export default function RegisterPage() {
     { name: "phoneNumber", label: "رقم الهاتف", type: "text", placeholder: "ادخل رقم هاتفك",requierd:true },
     { name: "password", label: "الرقم السري", type: "password", placeholder: "ادخل الرقم السري" ,requierd:true},
     { name: "address", label: "العنوان", type: "text", placeholder: "ادخل العنوان" ,requierd:true},
-    { name: "googleMapLink", label: "لينك جوجل ماب", type: "url", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "googleMapLink", label: "جوجل ماب", type: "url", placeholder: "ادخل العنوان" ,requierd:true},
+    { name: "nationalId", label: "رقم السجل التجاري او الرقم الوطني الموحد للمنشأة", type: "text", placeholder: "الرقم الوطنى" ,requierd:true},
+    { name: "imageOftrading", label: "صورة من السجل التجاري", type: "file", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "nationalId2", label: "رقم الهوية الوطنية / الاقامة", type: "text", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "imageOfnationalId", label: "صورة من الهوية الوطنية الرقمية", type: "file", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "Iban", label: "رقم الايبان البنكي", type: "text", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "nameOfbank", label: "اسم البنك", type: "text", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "nameOfperson", label: "اسم المستفيد بالغة الانجليزية او العربية", type: "text", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "imageOfiban", label: "وثائق داعمة للايبان صورة من بطاقة الحساب او خطاب الايبان", type: "file", placeholder: "ادخل لينك  الموقع" ,requierd:true},
+    { name: "imageOffront", label: "صورة من واجهة المحل", type: "file", placeholder: "ادخل لينك  الموقع" ,requierd:true},
   ];
 
   const url = `${BaseUrl}traders/signup`;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!agree) {
-      toast.error("يجب الموافقة على الشروط والأحكام قبل التسجيل");
-      return;
-    }
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-  const response = await axios.post<ApiResponse<signup_user>>(url, formData, {
-  validateStatus: () => true,
-});
+  if (!agree) {
+    toast.error("يجب الموافقة على الشروط والأحكام قبل التسجيل");
+    return;
+  }
 
-const status = response.status;
-const message = response.data.message;
+  try {
+    const formDataToSend = new FormData();
 
-      console.log(message);
-      
-      if (status === 200 || status === 201) {
-        toast.success('تم تسجيل الدخول بنجاح 🎉');
-        router.push("/trade/login_trade");
-      } else if (status === 400) {
-        toast.error(`${message}`);
-      } else if (status === 401) {
-        toast.error(message);
-      } else if (status === 409) {
-        toast.error(message);
-      } else if (status === 500) {
-        toast.error('خطأ في السيرفر، حاول لاحقًا');
+    // ضيف كل المدخلات في formData
+    for (const [key, value] of Object.entries(formData)) {
+      if (value instanceof File) {
+        formDataToSend.append(key, value); // فايل عادي
       } else {
-        toast.error(`خطأ غير معروف: ${status}`);
+        formDataToSend.append(key, value);
       }
-    } catch (error: any) {
-      console.log(error);
-      toast.error('حدث خطأ في عملية التسجيل');
     }
-  };
+
+    const response = await axios.post<ApiResponse<signup_user>>(url, formDataToSend, {
+      headers: {
+        "Content-Type": "multipart/form-data", // optional, axios بيضبطه تلقائي
+      },
+      validateStatus: () => true,
+    });
+
+    const status = response.status;
+    const message = response.data.message;
+
+    if (status === 200 || status === 201) {
+      toast.success("تم تسجيل الدخول بنجاح 🎉");
+      router.push("/trade/login_trade");
+    } else if (status === 400 || status === 401 || status === 409) {
+      toast.error(message);
+    } else if (status === 500) {
+      toast.error("خطأ في السيرفر، حاول لاحقًا");
+    } else {
+      toast.error(`خطأ غير معروف: ${status}`);
+    }
+
+  } catch (error) {
+    console.error(error);
+    toast.error("حدث خطأ في عملية التسجيل");
+  }
+};
+
 
   const termsText = `
 رقم الوثيقة: WIMY-TC-001

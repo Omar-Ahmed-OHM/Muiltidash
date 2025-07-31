@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Container from "../Container";
 import { ApiResponse, type FieldForm } from "@/app/lib/type";
-import { fetchData } from "@/app/lib/methodes";
-import InputField from "./Input";
+import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
-import axios from "axios";
+import InputField from "./Input";
+
 type Props = {
   fields: FieldForm[];
   data: Record<string, any>;
@@ -31,7 +31,6 @@ export default function FormField({ fields, data, onChange }: Props) {
   }, [fields]);
 
   const handelchange = (field: string, value: any) => {
-    
     const updatedData = { ...formData, [field]: value };
     setFormData(updatedData);
     onChange(updatedData);
@@ -70,52 +69,62 @@ export default function FormField({ fields, data, onChange }: Props) {
                   </div>
                 ))}
               </div>
+
             ) : field.type === "password" ? (
-            <div className="relative">
+              <div className="relative">
+                <input
+                  name={field.name}
+                  type={showPassword[field.name] ? "text" : "password"}
+                  value={formData[field.name] || ""}
+                  onChange={(e) => handelchange(field.name, e.target.value)}
+                  placeholder={field.placeholder}
+                  className="w-full border rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-600 text-right"
+                />
+                <button
+                  type="button"
+                  onClick={() => togglePasswordVisibility(field.name)}
+                  className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-600 hover:text-purple-600"
+                >
+                  {showPassword[field.name] ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
 
-  <input
-    name={field.name}
-    type={showPassword[field.name] ? "text" : "password"}
-    value={formData[field.name] || ""}
-    onChange={(e) => handelchange(field.name, e.target.value)}
-    placeholder={field.placeholder}
-    className="w-full border rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-600 text-right"
-  />
-  <button
-    type="button"
-    onClick={() => togglePasswordVisibility(field.name)}
-    className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-600 hover:text-purple-600"
-  >
-    {showPassword[field.name] ? <EyeOff size={20} /> : <Eye size={20} />}
-  </button>
-</div>
+            ) : field.name === "phoneNumber" ? (
+              <PhoneInput
+                country="sa"
+                value={formData[field.name] || ""}
+                onChange={(value) => handelchange(field.name, value)}
+                enableSearch
+                preferredCountries={["eg", "sa", "ae"]}
+                inputStyle={{
+                  width: "100%",
+                  padding: "12px",
+                  paddingLeft: '42px',
+                  borderRadius: "0.75rem",
+                  border: "1px solid #d1d5db",
+                  fontSize: "1rem",
+                  direction: "ltr",
+                  backgroundColor: "#f3f4f6",
+                }}
+                containerStyle={{ direction: "ltr", width: "100%" }}
+                buttonStyle={{
+                  border: "none",
+                  backgroundColor: "#f3f4f6",
+                  borderRadius: "0.75rem 0 0 0.75rem",
+                }}
+              />
 
-            ):field.name === "phoneNumber" ? (
-  <PhoneInput
-    country="sa"
-    value={formData[field.name] || ""}
-    onChange={(value) => handelchange(field.name, value)}
-    enableSearch
-    preferredCountries={["eg", "sa", "ae"]}
-    inputStyle={{
-      width: "100%",
-      padding: "12px",
-      paddingLeft:'42px',
-      borderRadius: "0.75rem",
-      border: "1px solid #d1d5db",
-      fontSize: "1rem",
-      direction: "ltr",
-      backgroundColor: "#f3f4f6",
-    }}
-    containerStyle={{ direction: "ltr", width: "100%" }}
-    buttonStyle={{
-      border: "none",
-      backgroundColor: "#f3f4f6",
-      borderRadius: "0.75rem 0 0 0.75rem",
-    }}
-    
-  />
-):(
+            ) : field.type === "file" ? (
+           <input
+  type="file"
+  name={field.name}
+  onChange={(e) =>
+    handelchange(field.name, e.target.files?.[0] || null)
+  }
+/>
+
+
+            ) : (
               <InputField
                 name={field.name}
                 type={field.type}
