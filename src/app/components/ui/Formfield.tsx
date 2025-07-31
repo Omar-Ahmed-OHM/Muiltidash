@@ -7,7 +7,8 @@ import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
-import InputField from "./Input";
+import Cleave from 'cleave.js/react';
+
 
 type Props = {
   fields: FieldForm[];
@@ -85,7 +86,6 @@ export default function FormField({ fields, data, onChange }: Props) {
                   onClick={() => togglePasswordVisibility(field.name)}
                   className="absolute top-1/2 -translate-y-1/2 left-3 text-gray-600 hover:text-purple-600"
                 >
-                  {showPassword[field.name] ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
 
@@ -124,8 +124,17 @@ export default function FormField({ fields, data, onChange }: Props) {
 />
 
 
+            ): field.name === "cardNumber" ? (
+              <Cleave
+                options={{ creditCard: true }}
+                value={formData[field.name] || ""}
+                onChange={(e) => handelchange(field.name, e.target.value)}
+                placeholder={field.placeholder}
+                className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-600 text-right"
+                inputMode="numeric"
+              />
             ) : (
-              <InputField
+              <input
                 name={field.name}
                 type={field.type}
                 value={formData[field.name] || ""}
@@ -133,6 +142,7 @@ export default function FormField({ fields, data, onChange }: Props) {
                 placeholder={field.placeholder}
                 className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 required={field.requierd}
+                {...(field.inputMode ? { inputMode: field.inputMode } : {})}
               />
             )}
           </div>

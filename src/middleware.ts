@@ -8,13 +8,14 @@ export function middleware(request: NextRequest) {
   if (!tokenAdmin && pathname.startsWith('/admin')) {
     return NextResponse.redirect(new URL('/trade/login_trade', request.url));
   }
-
   if (tokenAdmin && pathname === '/trade/register') {
     return NextResponse.redirect(new URL('/admin', request.url));
   }
-
   if (tokenuser && pathname === '/register' || tokenuser && pathname === '/login') {
     return NextResponse.redirect(new URL('/', request.url));
+  }
+  if(!tokenuser && pathname === '/payment'){
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   if ( tokenAdmin && pathname === '/trade/login_trade') {
@@ -30,6 +31,7 @@ export const config = {
     '/trade/register',
     '/register',
     '/login',
-    '/trade/login_trade'
+    '/trade/login_trade',
+    '/payment'
   ],
 };

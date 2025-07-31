@@ -22,7 +22,9 @@ export interface FieldForm {
   options?: string[];       
   fetchUrl?: string;
   placeholder?:string 
-  requierd?:boolean       
+  requierd?:boolean 
+  maxLength?:number ,
+  inputMode?:"none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search"    
 }
 
 ////////// field form 

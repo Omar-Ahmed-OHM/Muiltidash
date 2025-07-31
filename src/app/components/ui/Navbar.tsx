@@ -79,7 +79,7 @@ const SmartNavbar = () => {
           <Image
   src={Logo}
   alt="شعار"
-  className="w-[46px] h-[46px] rounded-full border-2 border-border-icon shadow-[0_0_12px_#10b981] transition-transform hover:scale-110"
+  className="w-[30px] md:w-[46px]  h-[30px] md:h-[46px] rounded-full border-2 border-border-icon shadow-[0_0_12px_#10b981] transition-transform hover:scale-110"
   unoptimized
 />
 
