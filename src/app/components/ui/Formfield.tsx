@@ -124,11 +124,11 @@ export default function FormField({ fields, data, onChange }: Props) {
 />
 
 
-            ): field.name === "cardNumber" ? (
+            ): field.placeholder === "1234 5678 9012 3456" ? (
               <Cleave
                 options={{ creditCard: true }}
                 value={formData[field.name] || ""}
-                onChange={(e) => handelchange(field.name, e.target.value)}
+                onChange={(e) => handelchange(field.name, e.target.value.replace(/\s+/g, ""))}
                 placeholder={field.placeholder}
                 className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-purple-600 text-right"
                 inputMode="numeric"

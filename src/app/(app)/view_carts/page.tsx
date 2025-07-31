@@ -10,7 +10,7 @@ import { ShoppingCart, Trash } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { LoginRequiredModal } from '@/app/components/ui/Pop-up-login';
 import Link from 'next/link';
-
+import mayser from '../../../../public/asset/images/ميسر.png'
 interface ProductWithType {
   _id: string;
   title: string;
@@ -174,6 +174,8 @@ export default function Favorite() {
     }
   };
 
+  
+
   const renderProductCard = (product: ProductWithType, index: number) => (
     <div key={`${product.type}-${product._id}-${index}`} className="bg-[#FDF9FF] rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
       <div className="grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] gap-4 p-4 items-center">
@@ -225,14 +227,32 @@ export default function Favorite() {
               </>
             )}
 
-            {product.type === 'order' && product.orderId && (
-              <button
-                onClick={() => handelcanceleorder(product.orderId!)}
-                className="flex items-center gap-1 bg-[#EDE9FE] text-[#5B21B6] hover:bg-[#DDD6FE] px-3 py-1.5 rounded-full  text-xs sm:text-sm transition"
-              >
-                <Trash size={16} /> إلغاء الطلب
-              </button>
-            )}
+         {product.type === 'order' && product.orderId && (
+<div className="flex flex-wrap gap-3 mt-3">
+  <button
+    onClick={() => handelcanceleorder(product.orderId!)}
+    className="flex items-center gap-1 bg-[#EDE9FE] text-[#5B21B6] hover:bg-[#DDD6FE] px-3 py-1.5 rounded-full text-xs sm:text-sm transition"
+  >
+    <Trash size={16} /> إلغاء الطلب
+  </button>
+
+  <Link
+    href={`/payment/${product._id}?quantity=${product.quantity}&orderId=${product.orderId}`}
+    className="flex items-center gap-2 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white px-4 py-2 rounded-full text-xs sm:text-sm font-medium shadow-md hover:shadow-lg transition duration-200"
+  >
+    <Image
+      src={mayser}
+      width={24}
+      height={24}
+      className="rounded-full"
+      alt="mayser"
+    />
+    <span>دفع بواسطه ميسر</span>
+  </Link>
+</div>
+
+)}
+
           </div>
         </div>
       </div>
